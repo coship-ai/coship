@@ -1,0 +1,379 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import Card from '../ui/Card.astro';
+import ShipLogo from '../icons/ShipLogo.astro';
+
+const coshipFeatures = [
+  'MCP Server access — skills delivered online',
+  'Architecture templates (SaaS, Mobile)',
+  'Personality & working style config',
+  'OWASP security best practices',
+  'Cockpit — manage your agent & projects',
+  'Continuous skill updates'
+];
+
+const autoshipFeatures = [
+  'Autonomous task execution',
+  'Continuous learning & adaptation',
+  'Daily progress updates & reports',
+  'Hands-off implementation',
+  'Proactive issue resolution'
+];
+---
+
+<section id="pricing" class="pt-24 pb-16 md:pt-28 md:pb-20 bg-dark-950 relative overflow-hidden">
+  <!-- Background glow -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-ocean-500/5 rounded-full blur-3xl"></div>
+
+  <Container class="relative z-10">
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-6">
+      <h2 class="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-ocean-50 mb-3">
+        Choose Your Plan
+      </h2>
+      <p class="text-ocean-300">
+        Start with Ship as your Agentic CTO today.
+      </p>
+    </div>
+
+    <!-- Currency selector -->
+    <div class="flex justify-center gap-2 mb-8">
+      <button data-currency="USD" class="currency-btn active px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border">
+        $ USD
+      </button>
+      <button data-currency="GBP" class="currency-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border">
+        £ GBP
+      </button>
+      <button data-currency="EUR" class="currency-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border">
+        € EUR
+      </button>
+    </div>
+
+    <!-- Pricing cards -->
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
+
+      <!-- CoShip -->
+      <Card variant="glow" class="relative flex flex-col p-5 md:p-6">
+        <!-- Launch badge -->
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+          <span class="px-3 py-1 bg-gradient-to-r from-ocean-500 to-ocean-600 rounded-full text-xs font-semibold text-white shadow-lg shadow-ocean-500/25 whitespace-nowrap">
+            Launch Special — 20 licenses only
+          </span>
+        </div>
+
+        <!-- Header row -->
+        <div class="flex items-center gap-4 pt-2 mb-4">
+          <div class="w-12 h-12 flex items-center justify-center bg-ocean-500/10 rounded-xl border border-ocean-500/20">
+            <ShipLogo size="sm" class="text-ocean-400 scale-75" />
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-xl text-ocean-50">CoShip</h3>
+            <p class="text-ocean-400 text-xs">Your Agentic CTO</p>
+          </div>
+        </div>
+
+        <!-- Plan toggle -->
+        <div class="mb-4">
+          <div class="flex items-center justify-center gap-1 mb-3 bg-dark-800/50 rounded-full p-1">
+            <button class="plan-toggle active px-3 py-1.5 rounded-full text-xs font-medium transition-all" data-plan="lifetime">
+              Lifetime
+            </button>
+            <button class="plan-toggle px-3 py-1.5 rounded-full text-xs font-medium transition-all" data-plan="monthly">
+              Monthly
+            </button>
+            <button class="plan-toggle px-3 py-1.5 rounded-full text-xs font-medium transition-all" data-plan="yearly">
+              Yearly
+              <span class="ml-1 text-ocean-400">(Save 17%)</span>
+            </button>
+          </div>
+
+          <!-- Lifetime price -->
+          <div class="lifetime-price flex items-baseline gap-2 justify-center">
+            <span class="text-3xl font-display font-bold text-ocean-50" data-price="lifetime">$799</span>
+            <span class="text-ocean-400 text-xs">one-time</span>
+          </div>
+
+          <!-- Monthly price -->
+          <div class="monthly-price hidden flex items-baseline gap-2 justify-center">
+            <span class="text-3xl font-display font-bold text-ocean-50" data-price="monthly">$125</span>
+            <span class="text-ocean-400 text-xs">/month per project</span>
+          </div>
+
+          <!-- Yearly price -->
+          <div class="yearly-price hidden flex items-baseline gap-2 justify-center">
+            <span class="text-3xl font-display font-bold text-ocean-50" data-price="yearly">$1249</span>
+            <span class="text-ocean-400 text-xs">/year unlimited projects</span>
+          </div>
+        </div>
+
+        <!-- Value Proposition Callout -->
+        <div class="mb-4 p-3 bg-ocean-950/50 border border-ocean-800/50 rounded-lg">
+          <div class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-ocean-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="font-semibold text-ocean-200 text-xs">Less than a single day's contractor rate — get an always-available CTO for the price of 1-2 hours of consulting.</p>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <ul class="space-y-2 mb-4 flex-1">
+          {coshipFeatures.map(feature => (
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-ocean-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-ocean-200 text-sm">{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <!-- CTA -->
+        <div>
+          <Button href="https://app.coship.dev" size="md" class="w-full justify-center">
+            <span class="lifetime-cta">Claim Lifetime License</span>
+            <span class="monthly-cta hidden">Try for Free</span>
+            <span class="yearly-cta hidden">Try for Free</span>
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Button>
+          <p class="lifetime-note text-center text-xs text-ocean-500 mt-2">Unlimited projects forever</p>
+          <p class="monthly-note hidden text-center text-xs text-ocean-500 mt-2">Cancel anytime</p>
+          <p class="yearly-note hidden text-center text-xs text-ocean-500 mt-2">Cancel anytime</p>
+        </div>
+      </Card>
+
+      <!-- AutoShip -->
+      <Card variant="elevated" class="relative flex flex-col p-5 md:p-6 opacity-90">
+        <!-- Coming Soon badge -->
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+          <span class="px-3 py-1 bg-gradient-to-r from-dark-700 to-dark-800 rounded-full text-xs font-semibold text-ocean-300 shadow-lg whitespace-nowrap border border-ocean-600/20">
+            Coming Soon
+          </span>
+        </div>
+
+        <!-- Header row -->
+        <div class="flex items-center gap-4 pt-2 mb-4">
+          <div class="w-12 h-12 flex items-center justify-center bg-ocean-500/10 rounded-xl border border-ocean-500/20">
+            <svg class="w-6 h-6 text-ocean-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-xl text-ocean-50">AutoShip</h3>
+            <p class="text-ocean-400 text-xs">AGI-powered autonomy</p>
+          </div>
+        </div>
+
+        <!-- Spacer to align with CoShip toggle -->
+        <div class="mb-4">
+          <div class="h-[34px] mb-3"></div>
+          <div class="flex items-baseline gap-2 justify-center">
+            <span class="text-3xl font-display font-bold text-ocean-400">TBD</span>
+            <span class="text-ocean-500 text-xs">pricing coming soon</span>
+          </div>
+        </div>
+
+        <!-- Description Callout -->
+        <div class="mb-4 p-3 bg-ocean-950/50 border border-ocean-800/50 rounded-lg">
+          <div class="flex items-start gap-2">
+            <svg class="w-4 h-4 text-ocean-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <p class="font-semibold text-ocean-200 text-xs">Works around the clock — you set direction, Ship delivers results.</p>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <ul class="space-y-2 mb-4 flex-1">
+          {autoshipFeatures.map(feature => (
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-ocean-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+              <span class="text-ocean-300 text-sm">{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <!-- CTA -->
+        <div>
+          <Button href="#notify" variant="ghost" size="md" class="w-full justify-center">
+            Join Waitlist
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </Button>
+          <p class="text-center text-xs text-ocean-500 mt-2">Requires CoShip plan</p>
+        </div>
+      </Card>
+    </div>
+
+    <!-- Trust badge -->
+    <div class="mt-6 text-center">
+      <p class="inline-flex items-center gap-2 px-3 py-1.5 bg-dark-800/50 rounded-full text-xs text-ocean-300">
+        <svg class="w-3.5 h-3.5 text-ocean-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        Requires Claude Pro or Team plan
+      </p>
+    </div>
+  </Container>
+</section>
+
+<script>
+  // Currency data
+  const currencies: Record<string, { symbol: string; lifetime: number; monthly: number; yearly: number }> = {
+    USD: { symbol: '$', lifetime: 899, monthly: 125, yearly: 1249 },
+    GBP: { symbol: '£', lifetime: 699, monthly: 99, yearly: 999 },
+    EUR: { symbol: '€', lifetime: 799, monthly: 115, yearly: 1149 }
+  };
+
+  let currentCurrency = 'USD';
+  let currentPlan = 'lifetime';
+
+  // Auto-detect currency from browser locale
+  const locale = navigator.language.toLowerCase();
+  const euroCountries = ['de', 'fr', 'es', 'it', 'nl', 'be', 'at', 'ie', 'pt', 'fi', 'gr', 'lu', 'mt', 'sk', 'si', 'ee', 'lv', 'lt', 'cy'];
+
+  if (locale.includes('gb') || locale === 'en-gb') {
+    currentCurrency = 'GBP';
+  } else if (euroCountries.some(c => locale.includes(c))) {
+    currentCurrency = 'EUR';
+  }
+
+  function updatePrices() {
+    const currency = currencies[currentCurrency];
+
+    // Update lifetime prices
+    document.querySelectorAll('[data-price="lifetime"]').forEach(el => {
+      el.textContent = `${currency.symbol}${currency.lifetime}`;
+    });
+
+    // Update monthly prices
+    document.querySelectorAll('[data-price="monthly"]').forEach(el => {
+      el.textContent = `${currency.symbol}${currency.monthly}`;
+    });
+
+    // Update yearly prices
+    document.querySelectorAll('[data-price="yearly"]').forEach(el => {
+      el.textContent = `${currency.symbol}${currency.yearly}`;
+    });
+  }
+
+  function updatePlanDisplay() {
+    const lifetimePrice = document.querySelector('.lifetime-price');
+    const monthlyPrice = document.querySelector('.monthly-price');
+    const yearlyPrice = document.querySelector('.yearly-price');
+    const lifetimeCta = document.querySelector('.lifetime-cta');
+    const monthlyCta = document.querySelector('.monthly-cta');
+    const yearlyCta = document.querySelector('.yearly-cta');
+    const lifetimeNote = document.querySelector('.lifetime-note');
+    const monthlyNote = document.querySelector('.monthly-note');
+    const yearlyNote = document.querySelector('.yearly-note');
+
+    // Hide all first
+    lifetimePrice?.classList.add('hidden');
+    monthlyPrice?.classList.add('hidden');
+    yearlyPrice?.classList.add('hidden');
+    lifetimeCta?.classList.add('hidden');
+    monthlyCta?.classList.add('hidden');
+    yearlyCta?.classList.add('hidden');
+    lifetimeNote?.classList.add('hidden');
+    monthlyNote?.classList.add('hidden');
+    yearlyNote?.classList.add('hidden');
+
+    // Show based on current plan
+    if (currentPlan === 'lifetime') {
+      lifetimePrice?.classList.remove('hidden');
+      lifetimeCta?.classList.remove('hidden');
+      lifetimeNote?.classList.remove('hidden');
+    } else if (currentPlan === 'monthly') {
+      monthlyPrice?.classList.remove('hidden');
+      monthlyCta?.classList.remove('hidden');
+      monthlyNote?.classList.remove('hidden');
+    } else if (currentPlan === 'yearly') {
+      yearlyPrice?.classList.remove('hidden');
+      yearlyCta?.classList.remove('hidden');
+      yearlyNote?.classList.remove('hidden');
+    }
+  }
+
+  function updateCurrencyButtons() {
+    document.querySelectorAll('.currency-btn').forEach(btn => {
+      const currency = btn.getAttribute('data-currency');
+      if (currency === currentCurrency) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  function updatePlanButtons() {
+    document.querySelectorAll('.plan-toggle').forEach(btn => {
+      const plan = btn.getAttribute('data-plan');
+      if (plan === currentPlan) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  // Currency button handlers
+  document.querySelectorAll('.currency-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentCurrency = btn.getAttribute('data-currency') || 'USD';
+      updateCurrencyButtons();
+      updatePrices();
+    });
+  });
+
+  // Plan toggle handlers
+  document.querySelectorAll('.plan-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentPlan = btn.getAttribute('data-plan') || 'lifetime';
+      updatePlanButtons();
+      updatePlanDisplay();
+    });
+  });
+
+  // Initialize
+  updateCurrencyButtons();
+  updatePlanButtons();
+  updatePrices();
+  updatePlanDisplay();
+</script>
+
+<style>
+  .currency-btn {
+    background-color: color-mix(in srgb, var(--color-dark-800) 60%, transparent);
+    color: var(--color-ocean-400);
+    border-color: color-mix(in srgb, var(--color-ocean-500) 20%, transparent);
+    cursor: pointer;
+  }
+
+  .currency-btn:hover {
+    border-color: color-mix(in srgb, var(--color-ocean-500) 40%, transparent);
+  }
+
+  .currency-btn.active {
+    background-color: color-mix(in srgb, var(--color-ocean-500) 20%, transparent);
+    color: var(--color-ocean-50);
+    border-color: color-mix(in srgb, var(--color-ocean-500) 40%, transparent);
+  }
+
+  .plan-toggle {
+    border: 1px solid transparent;
+    color: var(--color-ocean-400);
+    cursor: pointer;
+  }
+
+  .plan-toggle.active {
+    background-color: color-mix(in srgb, var(--color-ocean-500) 20%, transparent);
+    color: var(--color-ocean-50);
+  }
+</style>

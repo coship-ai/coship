@@ -1,0 +1,327 @@
+---
+import Container from '../ui/Container.astro';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Matching',
+    problem: 'Months finding the right co-founder',
+    description: 'Define Ship\'s personality and working style. How should Ship challenge your ideas? How much should Ship explain? Establish the working relationship in minutes, not months.',
+    color: 'bg-orange-500',
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>`
+  },
+  {
+    number: '02',
+    title: 'Define',
+    problem: 'Vague ideas, scope creep, no direction',
+    description: 'Transform your vision into a structured product roadmap. Ship guides you through defining who it\'s for, what you\'re building, and how you\'ll measure success.',
+    color: 'bg-blue-600',
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>`
+  },
+  {
+    number: '03',
+    title: 'Scope',
+    problem: 'Overwhelming backlogs, unclear priorities',
+    description: 'Break your vision into focused, actionable work. Ship creates the right-sized tasks to maintain momentum from MVP through iterations.',
+    color: 'bg-emerald-600',
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+    </svg>`
+  },
+  {
+    number: '04',
+    title: 'Build',
+    problem: 'Inconsistent architecture, technical debt',
+    description: 'Ship brings your vision to life with production-ready code. You focus on product decisions while Ship handles technical excellence.',
+    color: 'bg-violet-600',
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    </svg>`
+  },
+  {
+    number: '05',
+    title: 'Review',
+    problem: 'Missed bugs, security vulnerabilities, broken features',
+    description: 'Ship reviews your code for security, performance, and best practices. Catch issues before your users do with automated testing and quality checks.',
+    color: 'bg-rose-600',
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+    </svg>`
+  },
+  {
+    number: '06',
+    title: 'Ship',
+    problem: 'Deployment anxiety, launch delays',
+    description: 'Deploy with confidence using built-in CI/CD workflows. Ship handles infrastructure, environment management, and go-live—production-ready from day one.',
+    color: 'bg-amber-500',
+    icon: `<svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+    </svg>`
+  }
+];
+
+// Accent colors for the top strip of each card
+const cardAccents = [
+  'bg-ocean-500',
+  'bg-ocean-400',
+  'bg-accent',
+  'bg-ocean-600',
+  'bg-ocean-700',
+  'bg-accent-bright',
+];
+---
+
+<section id="process" class="bg-dark-950">
+  <Container>
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto pt-24 md:pt-32 pb-12">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-ocean-50 mb-6">
+        Ship's Process
+      </h2>
+      <p class="text-lg text-ocean-300">
+        A co-founder that understands your vision and helps you execute. From idea to shipped product with clarity at every step.
+      </p>
+    </div>
+  </Container>
+
+  <!-- Scroll-driven stacked cards -->
+  <div class="stacked-scroll-container">
+    {steps.map((step, index) => (
+      <div
+        class="stacked-card-wrapper"
+        data-index={index}
+        style={`--card-index: ${index}; --total-cards: ${steps.length};`}
+      >
+        <div class="stacked-card">
+          <!-- Colored accent strip at top -->
+          <div class={`card-accent-strip ${cardAccents[index]}`}></div>
+
+          <!-- Card body -->
+          <div class="card-body">
+            <div class="card-content">
+              <!-- Text content -->
+              <div class="card-text">
+                <div class="step-indicator">
+                  <span class="step-number">{step.number}</span>
+                  <span class="step-divider"></span>
+                  <span class="step-label">Step {index + 1} of {steps.length}</span>
+                </div>
+                <h3 class="font-display font-bold text-2xl md:text-3xl text-ocean-50 mb-2">
+                  {step.title}
+                </h3>
+                <p class="text-ocean-400 italic mb-4 text-sm md:text-base">
+                  "{step.problem}"
+                </p>
+                <p class="text-ocean-200 leading-relaxed text-base md:text-lg">
+                  {step.description}
+                </p>
+              </div>
+              <!-- Icon visual -->
+              <div class="card-visual">
+                <div class="icon-container">
+                  <Fragment set:html={step.icon} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+    <!-- Spacer to allow last card to be scrolled and viewed fully -->
+    <div class="card-spacer"></div>
+  </div>
+</section>
+
+<style>
+  .stacked-scroll-container {
+    position: relative;
+    padding: 0 1rem;
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .stacked-scroll-container {
+      padding: 0 2rem;
+    }
+  }
+
+  .stacked-card-wrapper {
+    position: sticky;
+    /* Each card sticks slightly lower, revealing the top of previous cards */
+    top: calc(5rem + var(--card-index) * 1.5rem);
+    /* Margin creates scroll distance - each card scrolls into view individually */
+    margin-bottom: 25vh;
+    /* Higher index cards stack ON TOP of lower index cards */
+    z-index: calc(var(--card-index) + 1);
+  }
+
+  @media (min-width: 768px) {
+    .stacked-card-wrapper {
+      top: calc(6rem + var(--card-index) * 2rem);
+      margin-bottom: 30vh;
+    }
+  }
+
+  /* Last card doesn't need the large margin */
+  .stacked-card-wrapper:last-of-type {
+    margin-bottom: 0;
+  }
+
+  /* Spacer at end to allow viewing the last card */
+  .card-spacer {
+    height: 4rem;
+  }
+
+  .stacked-card {
+    width: 100%;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(14, 165, 233, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .stacked-card:hover {
+    box-shadow:
+      0 30px 60px -12px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(14, 165, 233, 0.2);
+  }
+
+  /* Colored accent strip at the top of each card */
+  .card-accent-strip {
+    height: 6px;
+    width: 100%;
+  }
+
+  /* Card body with dark theme matching pricing */
+  .card-body {
+    background: linear-gradient(180deg, var(--color-dark-800) 0%, var(--color-dark-900) 100%);
+    border: 1px solid rgba(14, 165, 233, 0.15);
+    border-top: none;
+    border-radius: 0 0 1.25rem 1.25rem;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .card-content {
+      flex-direction: row;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 2rem 2.5rem;
+    }
+  }
+
+  .card-text {
+    flex: 1;
+  }
+
+  .step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .step-number {
+    font-family: var(--font-family-display);
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--color-ocean-400);
+  }
+
+  .step-divider {
+    width: 1px;
+    height: 1rem;
+    background: var(--color-dark-600);
+  }
+
+  .step-label {
+    font-size: 0.75rem;
+    color: var(--color-ocean-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .card-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .card-visual {
+      flex: 0 0 140px;
+    }
+  }
+
+  .icon-container {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--color-dark-700) 0%, var(--color-dark-800) 100%);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-ocean-400);
+  }
+
+  @media (min-width: 768px) {
+    .icon-container {
+      width: 120px;
+      height: 120px;
+      border-radius: 1.25rem;
+    }
+  }
+
+  .icon-container :global(svg) {
+    width: 40px;
+    height: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .icon-container :global(svg) {
+      width: 48px;
+      height: 48px;
+    }
+  }
+</style>
+
+<script>
+  // Stacked scroll effect - CSS handles positioning, JS adds subtle polish
+  const cards = document.querySelectorAll('.stacked-card-wrapper') as NodeListOf<HTMLElement>;
+
+  function updateCards() {
+    cards.forEach((wrapper) => {
+      const rect = wrapper.getBoundingClientRect();
+      const card = wrapper.querySelector('.stacked-card') as HTMLElement;
+      if (!card) return;
+
+      const stickyTop = parseFloat(getComputedStyle(wrapper).top);
+      const distanceFromSticky = rect.top - stickyTop;
+
+      // Subtle scale effect when card is covered by newer cards
+      if (distanceFromSticky <= -20) {
+        const scale = Math.max(0.97, 1 + (distanceFromSticky / 3000));
+        card.style.transform = `scale(${scale})`;
+      } else {
+        card.style.transform = 'scale(1)';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateCards, { passive: true });
+  updateCards();
+</script>

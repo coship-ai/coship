@@ -1,0 +1,86 @@
+---
+import ShipLogo from '../icons/ShipLogo.astro';
+import ClaudeIcon from '../icons/ClaudeIcon.astro';
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+---
+
+<section class="relative min-h-screen flex items-center justify-center pt-20 pb-16 overflow-hidden">
+  <!-- Background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-b from-dark-950 via-dark-900 to-dark-950"></div>
+
+  <!-- Animated background orbs -->
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-ocean-500/10 rounded-full blur-3xl animate-float"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-ocean-600/10 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+
+  <Container class="relative z-10">
+    <div class="flex flex-col items-center text-center max-w-4xl mx-auto">
+      <!-- Logo -->
+      <div class="mb-8 animate-fade-in-up">
+        <ShipLogo size="xl" class="text-ocean-400" />
+      </div>
+
+      <!-- Headline -->
+      <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ocean-50 mb-10 animate-fade-in-up" style="animation-delay: 0.1s;">
+        Meet Ship.
+        <span class="block bg-gradient-to-r from-ocean-400 to-accent-bright bg-clip-text text-transparent pb-4">
+          Your Agentic CTO.
+        </span>
+      </h1>
+
+      <!-- Powered by Claude badge -->
+      <div class="flex items-center gap-3 mb-10 animate-fade-in-up" style="animation-delay: 0.15s;">
+        <a
+          href="https://claude.ai"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-claude/20 to-claude-dark/20 border border-claude/40 rounded-full text-sm text-claude-light font-medium hover:border-claude/60 hover:from-claude/30 hover:to-claude-dark/30 transition-all duration-300"
+        >
+          <ClaudeIcon size="sm" class="text-claude" />
+          Powered by Claude
+        </a>
+        <span class="inline-flex items-center gap-2 px-4 py-2 bg-dark-800/60 border border-ocean-500/20 rounded-full text-sm text-ocean-300 font-medium">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+          </svg>
+          macOS only
+        </span>
+      </div>
+
+      <!-- Subheadline -->
+      <p class="text-lg sm:text-xl text-ocean-200 max-w-2xl mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
+        From vision to version. Ship helps you define, refine, and iterate on your product—then builds it with online skills that auto-update. Powered by Claude.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+        <Button href="#pricing" size="lg">
+          Pricing
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </Button>
+        <Button href="#process" variant="secondary" size="lg">
+          How Ship Works
+        </Button>
+      </div>
+
+      <!-- Social proof -->
+      <p class="mt-8 text-ocean-400 text-sm italic animate-fade-in-up" style="animation-delay: 0.35s;">
+        "Ship isn't just a coding tool—it's a technical co-founder that actually understands what I'm building."
+      </p>
+    </div>
+  </Container>
+
+</section>
+
+<style>
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+</style>

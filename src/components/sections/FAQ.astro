@@ -1,0 +1,132 @@
+---
+import Container from '../ui/Container.astro';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+const faqs: FAQItem[] = [
+  {
+    question: 'What are CoShip templates?',
+    answer: 'CoShip templates are pre-configured architecture patterns for common product types—SaaS platforms, mobile apps, and more. Each template includes the right folder structure, best practices, and skills optimized for that product type. Think of them as battle-tested blueprints that help Ship understand what you\'re building from day one.'
+  },
+  {
+    question: 'How is this different from using Claude directly?',
+    answer: 'Using Claude directly is like having a brilliant consultant who knows nothing about your project each time you start a conversation. Ship is a configured Agentic CTO with context about your product, your preferences, and your working style. Ship challenges your ideas, asks clarifying questions, and maintains continuity across sessions. It\'s the difference between a tool and a technical co-founder.'
+  },
+  {
+    question: 'How are skills delivered?',
+    answer: 'CoShip skills are delivered via MCP (Model Context Protocol). Your skills live online, always up-to-date, always improving. When we release new skills or enhance existing ones, you get access automatically—no downloads, no manual updates. Connect Claude to your CoShip MCP server and start building.'
+  },
+  {
+    question: 'What\'s included in CoShip?',
+    answer: 'CoShip gives you access to our MCP server with a growing library of CTO skills—architecture templates (SaaS, Mobile), workflow presets, and personality configuration. Skills are hosted online and auto-update. Lifetime license holders get all current and future skill updates forever.'
+  },
+  {
+    question: 'What\'s the Autonomous tier?',
+    answer: 'AutoShip is our upcoming tier where Ship takes more initiative. Instead of you driving each session, Ship can work independently—learning from your feedback, executing tasks autonomously, and providing daily progress updates. Think of Lifetime/Pro as "pair programming with an Agentic CTO" and AutoShip as "delegating to a capable team member." Coming soon.'
+  },
+  {
+    question: 'Do I need coding experience?',
+    answer: 'No prior coding experience required. Ship is designed for non-technical founders. Ship explains technical concepts as needed, handles the complexity of implementation, and guides you through product decisions. You\'ll learn as you build, but the focus is on your vision and product thinking—not on becoming a programmer.'
+  },
+  {
+    question: 'Can I use this for multiple projects?',
+    answer: 'Yes! Lifetime license holders can use CoShip for unlimited projects forever. Pro subscribers get unlimited projects on the yearly plan, or per-project access on monthly. Each project gets its own Ship personality and context, so you can run multiple products simultaneously.'
+  }
+];
+
+// FAQPage structured data for rich search results
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section id="faq" class="py-24 md:py-32 bg-dark-900">
+  <Container size="md">
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-ocean-50 mb-6">
+        Frequently Asked Questions
+      </h2>
+      <p class="text-lg text-ocean-300">
+        Everything you need to know about Ship and CoShip.
+      </p>
+    </div>
+
+    <!-- FAQ accordion -->
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <div class="faq-item border border-ocean-500/20 rounded-xl overflow-hidden bg-dark-900 hover:border-ocean-500/30 transition-colors">
+          <button
+            class="faq-trigger w-full flex items-center justify-between p-6 text-left"
+            aria-expanded="false"
+            data-index={index}
+          >
+            <span class="font-display font-semibold text-lg text-ocean-50 pr-4">{faq.question}</span>
+            <span class="faq-icon flex-shrink-0 w-6 h-6 text-ocean-400 transition-transform duration-300">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+          <div class="faq-content hidden">
+            <div class="px-6 pb-6 text-ocean-300 leading-relaxed">
+              {faq.answer}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.faq-item');
+      const content = item?.querySelector('.faq-content');
+      const icon = trigger.querySelector('.faq-icon');
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+      // Close all other items
+      document.querySelectorAll('.faq-item').forEach(otherItem => {
+        if (otherItem !== item) {
+          const otherTrigger = otherItem.querySelector('.faq-trigger');
+          const otherContent = otherItem.querySelector('.faq-content');
+          const otherIcon = otherItem.querySelector('.faq-icon');
+          otherTrigger?.setAttribute('aria-expanded', 'false');
+          otherContent?.classList.add('hidden');
+          otherIcon?.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current item
+      trigger.setAttribute('aria-expanded', String(!isExpanded));
+      content?.classList.toggle('hidden');
+      icon?.classList.toggle('rotate-180');
+    });
+  });
+</script>
+
+<style>
+  .faq-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .faq-icon.rotate-180 {
+    transform: rotate(180deg);
+  }
+</style>

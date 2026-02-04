@@ -1,0 +1,102 @@
+---
+import Container from '../ui/Container.astro';
+
+const features = [
+  { name: 'Cost', coship: 'From $125/mo', cofounder: '$0 (equity)', fractional: '$5-15k/mo', vibe: '$20-100/mo' },
+  { name: 'Equity required', coship: 'None', cofounder: '10-50%', fractional: 'Sometimes', vibe: 'None' },
+  { name: 'Availability', coship: '24/7 instant', cofounder: 'Their schedule', fractional: '10-20 hrs/wk', vibe: '24/7 instant' },
+  { name: 'Time to start', coship: 'Minutes', cofounder: '3-12 months', fractional: '2-4 weeks', vibe: 'Minutes' },
+  { name: 'Architecture quality', coship: 'Production-ready', cofounder: 'Varies', fractional: 'High', vibe: 'Often poor' },
+  { name: 'Security practices', coship: 'OWASP built-in', cofounder: 'Varies', fractional: 'Usually good', vibe: 'Often skipped' },
+  { name: 'Testing coverage', coship: 'Comprehensive', cofounder: 'Varies', fractional: 'Good', vibe: 'Minimal' },
+  { name: 'Scales with you', coship: 'Unlimited projects', cofounder: 'One venture', fractional: 'Limited hours', vibe: 'Yes' },
+];
+
+const columns = [
+  { key: 'coship', label: 'CoShip', highlight: true },
+  { key: 'cofounder', label: 'Technical Co-founder' },
+  { key: 'fractional', label: 'Fractional CTO' },
+  { key: 'vibe', label: 'Vibe Coding' },
+];
+---
+
+<section id="compare" class="py-24 md:py-32 bg-dark-900">
+  <Container>
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-ocean-50 mb-6">
+        How CoShip Compares
+      </h2>
+      <p class="text-lg text-ocean-300">
+        The technical expertise you need, without the traditional trade-offs.
+      </p>
+    </div>
+
+    <!-- Comparison table - Desktop -->
+    <div class="hidden lg:block overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="p-4 text-left text-ocean-400 font-medium text-sm border-b border-dark-700"></th>
+            {columns.map((col) => (
+              <th class={`p-4 text-center font-display font-semibold text-sm border-b ${col.highlight ? 'text-ocean-50 bg-ocean-500/10 border-ocean-500/30' : 'text-ocean-300 border-dark-700'}`}>
+                {col.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {features.map((feature, i) => (
+            <tr class={i % 2 === 0 ? 'bg-dark-800/30' : ''}>
+              <td class="p-4 text-ocean-200 font-medium text-sm border-b border-dark-700/50">
+                {feature.name}
+              </td>
+              {columns.map((col) => (
+                <td class={`p-4 text-center text-sm border-b ${col.highlight ? 'text-ocean-50 bg-ocean-500/5 border-ocean-500/20 font-medium' : 'text-ocean-400 border-dark-700/50'}`}>
+                  {feature[col.key as keyof typeof feature]}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Comparison cards - Mobile -->
+    <div class="lg:hidden space-y-6">
+      {columns.map((col) => (
+        <div class={`rounded-2xl p-6 ${col.highlight ? 'bg-ocean-500/10 border border-ocean-500/30' : 'bg-dark-800 border border-dark-700'}`}>
+          <h3 class={`font-display font-semibold text-lg mb-4 ${col.highlight ? 'text-ocean-50' : 'text-ocean-300'}`}>
+            {col.label}
+          </h3>
+          <dl class="space-y-3">
+            {features.map((feature) => (
+              <div class="flex justify-between items-center py-2 border-b border-dark-700/50 last:border-0">
+                <dt class="text-ocean-400 text-sm">{feature.name}</dt>
+                <dd class={`text-sm font-medium ${col.highlight ? 'text-ocean-50' : 'text-ocean-300'}`}>
+                  {feature[col.key as keyof typeof feature]}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-16 text-center">
+      <p class="text-ocean-300 mb-6">
+        Get the benefits of a technical co-founder without the search, the equity, or the compromise.
+      </p>
+      <a
+        href="#pricing"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-ocean-500 hover:bg-ocean-400 text-white font-semibold rounded-full transition-colors"
+      >
+        See Pricing
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </a>
+    </div>
+  </Container>
+</section>
