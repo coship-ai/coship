@@ -1,0 +1,130 @@
+---
+import ShipLogo from '../icons/ShipLogo.astro';
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+
+const cockpitUrl = import.meta.env.DEV ? 'http://localhost:3000' : 'https://cockpit.coship.ai';
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-dark-950/80 backdrop-blur-lg border-b border-ocean-500/10">
+  <Container>
+    <nav class="flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <ShipLogo size="sm" class="text-ocean-400 group-hover:text-ocean-300 transition-colors" />
+        <span class="font-display font-semibold text-xl text-ocean-50">CoShip</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#process" class="nav-link text-ocean-300 hover:text-ocean-50 transition-colors" data-section="process">Process</a>
+        <a href="#compare" class="nav-link text-ocean-300 hover:text-ocean-50 transition-colors" data-section="compare">Compare</a>
+        <a href="#pricing" class="nav-link text-ocean-300 hover:text-ocean-50 transition-colors" data-section="pricing">Pricing</a>
+        <a href="#faq" class="nav-link text-ocean-300 hover:text-ocean-50 transition-colors" data-section="faq">FAQ</a>
+      </div>
+
+      <!-- CTA -->
+      <div class="flex items-center gap-4">
+        <Button href={cockpitUrl} size="sm">
+          Try for Free
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </Button>
+
+        <!-- Mobile menu button -->
+        <button class="md:hidden p-2 text-ocean-200 hover:text-ocean-50" id="mobile-menu-btn" aria-label="Toggle menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </Container>
+
+  <!-- Mobile Menu -->
+  <div class="hidden md:hidden bg-dark-900 border-t border-ocean-500/10" id="mobile-menu">
+    <Container>
+      <div class="py-4 space-y-3">
+        <a href="#process" class="nav-link block py-2 text-ocean-300 hover:text-ocean-50 transition-colors" data-section="process">Process</a>
+        <a href="#compare" class="nav-link block py-2 text-ocean-300 hover:text-ocean-50 transition-colors" data-section="compare">Compare</a>
+        <a href="#pricing" class="nav-link block py-2 text-ocean-300 hover:text-ocean-50 transition-colors" data-section="pricing">Pricing</a>
+        <a href="#faq" class="nav-link block py-2 text-ocean-300 hover:text-ocean-50 transition-colors" data-section="faq">FAQ</a>
+      </div>
+    </Container>
+  </div>
+</header>
+
+<style>
+  .nav-link.active {
+    color: var(--color-ocean-50);
+    position: relative;
+  }
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-ocean-500);
+    border-radius: 1px;
+  }
+  /* Mobile active state */
+  @media (max-width: 767px) {
+    .nav-link.active::after {
+      display: none;
+    }
+    .nav-link.active {
+      color: var(--color-ocean-400);
+    }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+
+  // Close menu when clicking a link
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+    });
+  });
+
+  // Active section highlighting
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = ['process', 'compare', 'faq', 'pricing'];
+
+  function updateActiveLink() {
+    const scrollPos = window.scrollY + 100;
+
+    let currentSection = '';
+
+    sections.forEach(sectionId => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          currentSection = sectionId;
+        }
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('data-section') === currentSection) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+</script>

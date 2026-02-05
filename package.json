@@ -1,17 +1,31 @@
 {
-  "name": "second-spiral",
+  "name": "coship",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "concurrently -n db,cockpit,mcp -c cyan,green,magenta \"pnpm run dev:db\" \"pnpm run dev:cockpit\" \"pnpm run dev:mcp\"",
+    "dev:db": "supabase start",
+    "dev:web": "pnpm --filter @coship/web dev",
+    "dev:cockpit": "pnpm --filter @coship/cockpit dev",
+    "dev:mcp": "concurrently -n mcp,inspector -c magenta,blue \"cd apps/mcp-server && uv run fastmcp run src/coship_mcp/server.py --transport http --port 8000\" \"cd apps/mcp-server && PYTHONPATH=src uv run fastmcp dev src/coship_mcp/server.py\"",
+    "dev:mcp:auth": "cd apps/mcp-server && uv run fastmcp run src/coship_mcp/server.py --transport http --port 8000",
+    "dev:mcp:inspector": "cd apps/mcp-server && PYTHONPATH=src uv run fastmcp dev src/coship_mcp/server.py",
+    "build": "pnpm -r build",
+    "build:cockpit": "pnpm --filter @coship/cockpit build",
+    "preview:cockpit": "pnpm --filter @coship/cockpit preview",
+    "install:mcp": "cd apps/mcp-server && uv sync",
+    "install:all": "pnpm install && pnpm run install:mcp",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset",
+    "db:migrate": "supabase migration new",
+    "db:status": "supabase status",
+    "clean": "rm -rf node_modules apps/*/node_modules apps/mcp-server/.venv packages/*/node_modules"
   },
-  "dependencies": {
-    "@astrojs/sitemap": "^3.7.0",
-    "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.15",
-    "tailwindcss": "^4.1.18"
-  }
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.3"
+  },
+  "packageManager": "pnpm@9.15.0"
 }

@@ -1,0 +1,94 @@
+/* CoShip Shared Theme - Tailwind v4 */
+
+/* Custom fonts - Clash Display & Satoshi from Fontshare */
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Variable.woff2') format('woff2');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tailwind v4 Theme Configuration */
+@theme {
+  /* Ocean Color Palette */
+  --color-ocean-50: #f0f9ff;
+  --color-ocean-100: #e0f2fe;
+  --color-ocean-200: #b9e6fe;
+  --color-ocean-300: #7cd4fd;
+  --color-ocean-400: #38bdf8;
+  --color-ocean-500: #0ea5e9;
+  --color-ocean-600: #0891b2;
+  --color-ocean-700: #0e7490;
+  --color-ocean-800: #155e75;
+  --color-ocean-900: #164e63;
+  --color-ocean-950: #083344;
+
+  /* Dark backgrounds */
+  --color-dark-950: #030712;
+  --color-dark-900: #0a1628;
+  --color-dark-800: #0f2035;
+  --color-dark-700: #162d4a;
+  --color-dark-600: #1e3a5f;
+
+  /* Accent colors */
+  --color-accent: #0ea5e9;
+  --color-accent-bright: #22d3ee;
+  --color-accent-glow: #06b6d4;
+
+  /* Claude brand colors */
+  --color-claude: #D97757;
+  --color-claude-light: #E8A690;
+  --color-claude-dark: #C4593B;
+
+  /* Typography */
+  --font-family-display: 'Clash Display', system-ui, sans-serif;
+  --font-family-sans: 'Satoshi', system-ui, sans-serif;
+
+  /* Custom animations */
+  --animate-sail-sway: sail-sway 4s ease-in-out infinite;
+  --animate-wave-flow: wave-flow 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+  --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
+}
+
+/* Animation keyframes */
+@keyframes sail-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes wave-flow {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

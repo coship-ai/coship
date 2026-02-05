@@ -1,0 +1,11 @@
+{
+  "name": "@coship/ui",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    "./styles/theme.css": "./src/styles/theme.css"
+  },
+  "files": [
+    "src"
+  ]
+}
