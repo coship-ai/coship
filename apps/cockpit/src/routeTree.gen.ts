@@ -9,20 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LogoutRouteImport } from './routes/logout'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OauthConsentRouteImport } from './routes/oauth/consent'
-import { Route as AuthedSettingsRouteImport } from './routes/_authed/settings'
-import { Route as AuthedDashboardRouteImport } from './routes/_authed/dashboard'
+import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
+import { Route as AuthedNewProjectRouteImport } from './routes/_authed/new-project'
+import { Route as AuthedCockpitRouteImport } from './routes/_authed/_cockpit'
+import { Route as AuthedCockpitSettingsRouteImport } from './routes/_authed/_cockpit/settings'
+import { Route as AuthedCockpitDashboardRouteImport } from './routes/_authed/_cockpit/dashboard'
+import { Route as AuthedCockpitConfigurationRouteImport } from './routes/_authed/_cockpit/configuration'
+import { Route as AuthedCockpitAutoshipRouteImport } from './routes/_authed/_cockpit/autoship'
+import { Route as AuthedCockpitAnalyticsRouteImport } from './routes/_authed/_cockpit/analytics'
 
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LogoutRoute = LogoutRouteImport.update({
   id: '/logout',
   path: '/logout',
@@ -47,34 +47,72 @@ const OauthConsentRoute = OauthConsentRouteImport.update({
   path: '/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthedSettingsRoute = AuthedSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthedNewProjectRoute = AuthedNewProjectRouteImport.update({
+  id: '/new-project',
+  path: '/new-project',
   getParentRoute: () => AuthedRoute,
 } as any)
-const AuthedDashboardRoute = AuthedDashboardRouteImport.update({
+const AuthedCockpitRoute = AuthedCockpitRouteImport.update({
+  id: '/_cockpit',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCockpitSettingsRoute = AuthedCockpitSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthedCockpitRoute,
+} as any)
+const AuthedCockpitDashboardRoute = AuthedCockpitDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => AuthedRoute,
+  getParentRoute: () => AuthedCockpitRoute,
+} as any)
+const AuthedCockpitConfigurationRoute =
+  AuthedCockpitConfigurationRouteImport.update({
+    id: '/configuration',
+    path: '/configuration',
+    getParentRoute: () => AuthedCockpitRoute,
+  } as any)
+const AuthedCockpitAutoshipRoute = AuthedCockpitAutoshipRouteImport.update({
+  id: '/autoship',
+  path: '/autoship',
+  getParentRoute: () => AuthedCockpitRoute,
+} as any)
+const AuthedCockpitAnalyticsRoute = AuthedCockpitAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AuthedCockpitRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
-  '/signup': typeof SignupRoute
-  '/dashboard': typeof AuthedDashboardRoute
-  '/settings': typeof AuthedSettingsRoute
+  '/new-project': typeof AuthedNewProjectRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/oauth/consent': typeof OauthConsentRoute
+  '/analytics': typeof AuthedCockpitAnalyticsRoute
+  '/autoship': typeof AuthedCockpitAutoshipRoute
+  '/configuration': typeof AuthedCockpitConfigurationRoute
+  '/dashboard': typeof AuthedCockpitDashboardRoute
+  '/settings': typeof AuthedCockpitSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
-  '/signup': typeof SignupRoute
-  '/dashboard': typeof AuthedDashboardRoute
-  '/settings': typeof AuthedSettingsRoute
+  '/new-project': typeof AuthedNewProjectRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/oauth/consent': typeof OauthConsentRoute
+  '/analytics': typeof AuthedCockpitAnalyticsRoute
+  '/autoship': typeof AuthedCockpitAutoshipRoute
+  '/configuration': typeof AuthedCockpitConfigurationRoute
+  '/dashboard': typeof AuthedCockpitDashboardRoute
+  '/settings': typeof AuthedCockpitSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -82,10 +120,15 @@ export interface FileRoutesById {
   '/_authed': typeof AuthedRouteWithChildren
   '/login': typeof LoginRoute
   '/logout': typeof LogoutRoute
-  '/signup': typeof SignupRoute
-  '/_authed/dashboard': typeof AuthedDashboardRoute
-  '/_authed/settings': typeof AuthedSettingsRoute
+  '/_authed/_cockpit': typeof AuthedCockpitRouteWithChildren
+  '/_authed/new-project': typeof AuthedNewProjectRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/oauth/consent': typeof OauthConsentRoute
+  '/_authed/_cockpit/analytics': typeof AuthedCockpitAnalyticsRoute
+  '/_authed/_cockpit/autoship': typeof AuthedCockpitAutoshipRoute
+  '/_authed/_cockpit/configuration': typeof AuthedCockpitConfigurationRoute
+  '/_authed/_cockpit/dashboard': typeof AuthedCockpitDashboardRoute
+  '/_authed/_cockpit/settings': typeof AuthedCockpitSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -93,29 +136,42 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/logout'
-    | '/signup'
+    | '/new-project'
+    | '/auth/callback'
+    | '/oauth/consent'
+    | '/analytics'
+    | '/autoship'
+    | '/configuration'
     | '/dashboard'
     | '/settings'
-    | '/oauth/consent'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/logout'
-    | '/signup'
+    | '/new-project'
+    | '/auth/callback'
+    | '/oauth/consent'
+    | '/analytics'
+    | '/autoship'
+    | '/configuration'
     | '/dashboard'
     | '/settings'
-    | '/oauth/consent'
   id:
     | '__root__'
     | '/'
     | '/_authed'
     | '/login'
     | '/logout'
-    | '/signup'
-    | '/_authed/dashboard'
-    | '/_authed/settings'
+    | '/_authed/_cockpit'
+    | '/_authed/new-project'
+    | '/auth/callback'
     | '/oauth/consent'
+    | '/_authed/_cockpit/analytics'
+    | '/_authed/_cockpit/autoship'
+    | '/_authed/_cockpit/configuration'
+    | '/_authed/_cockpit/dashboard'
+    | '/_authed/_cockpit/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -123,19 +179,12 @@ export interface RootRouteChildren {
   AuthedRoute: typeof AuthedRouteWithChildren
   LoginRoute: typeof LoginRoute
   LogoutRoute: typeof LogoutRoute
-  SignupRoute: typeof SignupRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   OauthConsentRoute: typeof OauthConsentRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/logout': {
       id: '/logout'
       path: '/logout'
@@ -171,31 +220,93 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authed/settings': {
-      id: '/_authed/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthedSettingsRouteImport
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authed/new-project': {
+      id: '/_authed/new-project'
+      path: '/new-project'
+      fullPath: '/new-project'
+      preLoaderRoute: typeof AuthedNewProjectRouteImport
       parentRoute: typeof AuthedRoute
     }
-    '/_authed/dashboard': {
-      id: '/_authed/dashboard'
+    '/_authed/_cockpit': {
+      id: '/_authed/_cockpit'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthedCockpitRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/_cockpit/settings': {
+      id: '/_authed/_cockpit/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthedCockpitSettingsRouteImport
+      parentRoute: typeof AuthedCockpitRoute
+    }
+    '/_authed/_cockpit/dashboard': {
+      id: '/_authed/_cockpit/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthedDashboardRouteImport
-      parentRoute: typeof AuthedRoute
+      preLoaderRoute: typeof AuthedCockpitDashboardRouteImport
+      parentRoute: typeof AuthedCockpitRoute
+    }
+    '/_authed/_cockpit/configuration': {
+      id: '/_authed/_cockpit/configuration'
+      path: '/configuration'
+      fullPath: '/configuration'
+      preLoaderRoute: typeof AuthedCockpitConfigurationRouteImport
+      parentRoute: typeof AuthedCockpitRoute
+    }
+    '/_authed/_cockpit/autoship': {
+      id: '/_authed/_cockpit/autoship'
+      path: '/autoship'
+      fullPath: '/autoship'
+      preLoaderRoute: typeof AuthedCockpitAutoshipRouteImport
+      parentRoute: typeof AuthedCockpitRoute
+    }
+    '/_authed/_cockpit/analytics': {
+      id: '/_authed/_cockpit/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AuthedCockpitAnalyticsRouteImport
+      parentRoute: typeof AuthedCockpitRoute
     }
   }
 }
 
+interface AuthedCockpitRouteChildren {
+  AuthedCockpitAnalyticsRoute: typeof AuthedCockpitAnalyticsRoute
+  AuthedCockpitAutoshipRoute: typeof AuthedCockpitAutoshipRoute
+  AuthedCockpitConfigurationRoute: typeof AuthedCockpitConfigurationRoute
+  AuthedCockpitDashboardRoute: typeof AuthedCockpitDashboardRoute
+  AuthedCockpitSettingsRoute: typeof AuthedCockpitSettingsRoute
+}
+
+const AuthedCockpitRouteChildren: AuthedCockpitRouteChildren = {
+  AuthedCockpitAnalyticsRoute: AuthedCockpitAnalyticsRoute,
+  AuthedCockpitAutoshipRoute: AuthedCockpitAutoshipRoute,
+  AuthedCockpitConfigurationRoute: AuthedCockpitConfigurationRoute,
+  AuthedCockpitDashboardRoute: AuthedCockpitDashboardRoute,
+  AuthedCockpitSettingsRoute: AuthedCockpitSettingsRoute,
+}
+
+const AuthedCockpitRouteWithChildren = AuthedCockpitRoute._addFileChildren(
+  AuthedCockpitRouteChildren,
+)
+
 interface AuthedRouteChildren {
-  AuthedDashboardRoute: typeof AuthedDashboardRoute
-  AuthedSettingsRoute: typeof AuthedSettingsRoute
+  AuthedCockpitRoute: typeof AuthedCockpitRouteWithChildren
+  AuthedNewProjectRoute: typeof AuthedNewProjectRoute
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
-  AuthedDashboardRoute: AuthedDashboardRoute,
-  AuthedSettingsRoute: AuthedSettingsRoute,
+  AuthedCockpitRoute: AuthedCockpitRouteWithChildren,
+  AuthedNewProjectRoute: AuthedNewProjectRoute,
 }
 
 const AuthedRouteWithChildren =
@@ -206,7 +317,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthedRoute: AuthedRouteWithChildren,
   LoginRoute: LoginRoute,
   LogoutRoute: LogoutRoute,
-  SignupRoute: SignupRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   OauthConsentRoute: OauthConsentRoute,
 }
 export const routeTree = rootRouteImport

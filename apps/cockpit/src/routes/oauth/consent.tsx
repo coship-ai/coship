@@ -91,11 +91,10 @@ export const Route = createFileRoute("/oauth/consent")({
     return { authorization_id: authorizationId };
   },
   beforeLoad: async ({ context, search }) => {
-    // If user is not logged in, redirect to login with consent page as redirect
-    if (!context.user) {
+    // If user is not logged in, redirect to login
+    if (!context.user?.id) {
       throw redirect({
         to: "/login",
-        search: { redirect: `/oauth/consent?authorization_id=${search.authorization_id}` },
       });
     }
   },

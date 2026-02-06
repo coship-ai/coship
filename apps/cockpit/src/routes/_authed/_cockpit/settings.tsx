@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_authed/settings")({
+export const Route = createFileRoute("/_authed/_cockpit/settings")({
   component: SettingsPage,
 });
 
 function SettingsPage() {
-  const { user } = Route.useRouteContext();
+  const context = Route.useRouteContext();
+  const user = context.user;
   const tier = user?.app_metadata?.subscription_tier || "free";
 
   return (
@@ -24,6 +25,14 @@ function SettingsPage() {
             <div>
               <label className="block text-sm text-ocean-400 mb-1">Email</label>
               <p className="text-ocean-100">{user?.email}</p>
+            </div>
+            <div>
+              <label className="block text-sm text-ocean-400 mb-1">
+                GitHub
+              </label>
+              <p className="text-ocean-100">
+                {user?.user_metadata?.user_name || "Not connected"}
+              </p>
             </div>
             <div>
               <label className="block text-sm text-ocean-400 mb-1">

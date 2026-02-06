@@ -2,36 +2,39 @@ import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { getSupabaseServerClient } from "../utils/supabase";
 
-// Server function for login
-export const loginFn = createServerFn({ method: "POST" })
-  .inputValidator((d: { email: string; password: string }) => d)
+// Server function to check if user has projects
+const checkProjectsFn = createServerFn({ method: "GET" })
+  .inputValidator((d: { userId: string }) => d)
   .handler(async ({ data }) => {
     const supabase = getSupabaseServerClient();
-    const { error } = await supabase.auth.signInWithPassword({
-      email: data.email,
-      password: data.password,
-    });
+    const { data: projects } = await supabase
+      .from("projects")
+      .select("id")
+      .eq("user_id", data.userId)
+      .limit(1);
 
-    if (error) {
-      return {
-        error: true,
-        message: error.message,
-      };
-    }
-
-    return {
-      error: false,
-      message: "Login successful",
-    };
+    return { hasProjects: !!(projects && projects.length > 0) };
   });
 
 export const Route = createFileRoute("/_authed")({
   beforeLoad: async ({ context, location }) => {
-    if (!context.user) {
+    if (!context.user?.id) {
       throw redirect({
         to: "/login",
-        search: { redirect: location.href },
       });
+    }
+
+    // Skip project check if already heading to onboarding
+    if (location.pathname === "/new-project") {
+      return;
+    }
+
+    const { hasProjects } = await checkProjectsFn({
+      data: { userId: context.user.id },
+    });
+
+    if (!hasProjects) {
+      throw redirect({ to: "/new-project" });
     }
   },
   component: AuthedLayout,

@@ -7,16 +7,17 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { createServerFn } from "@tanstack/react-start";
 import { getSupabaseServerClient } from "../utils/supabase";
+import type { User } from "@supabase/supabase-js";
 import appCss from "../styles/app.css?url";
 
 // Server function to get current user
 const fetchUser = createServerFn({ method: "GET" }).handler(async () => {
   const supabase = getSupabaseServerClient();
   const { data } = await supabase.auth.getUser();
-  return data.user?.email ?? null;
+  return data.user ?? null;
 });
 
-export const Route = createRootRouteWithContext<{ user: string | null }>()({
+export const Route = createRootRouteWithContext<{ user: User | null }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
