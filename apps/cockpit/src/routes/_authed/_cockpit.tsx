@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_authed/_cockpit")({
 
 function CockpitLayout() {
   return (
-    <div className="min-h-screen bg-dark-900">
+    <div className="min-h-screen bg-dark-950">
       <TopBar />
       <main className="pt-14">
         <div className="max-w-5xl mx-auto px-6 py-8">

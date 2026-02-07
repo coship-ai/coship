@@ -1,0 +1,128 @@
+# CoShip Co-founder Configuration
+# This file defines how Ship (AI co-founder) works with you
+# Feel free to edit this file anytime to adjust our working relationship
+
+# When this configuration was created
+created_at: {timestamp}
+
+# Last updated timestamp
+updated_at: {timestamp}
+
+# ============================================================================
+# WORKING RELATIONSHIP
+# ============================================================================
+
+# How strongly Ship should challenge product ideas
+# Options: challenge_actively | raise_concerns_gently | only_serious_risks | trust_judgment
+challenge_level: {challenge_level}
+
+# How much Ship should explain technical decisions
+# Options: just_outcome | explain_reasoning | help_understand | full_trust
+transparency_level: {transparency_level}
+
+# ============================================================================
+# FEATURE DEVELOPMENT
+# ============================================================================
+
+# Who decides user experience and design
+# Options: ship_decides | ship_proposes_refine | founder_designs | depends_on_feature
+ux_design_model: {ux_design_model}
+
+# How often Ship provides progress updates
+# Options: show_when_done | daily_summaries | explain_happening | teach_as_go
+update_frequency: {update_frequency}
+
+# ============================================================================
+# MARKETING & CONTENT
+# ============================================================================
+
+# Who owns landing page and marketing content
+# Options: founder_handles | ship_handles
+marketing_owner: {marketing_owner}
+
+# ============================================================================
+# PROCESS & DOCUMENTATION
+# ============================================================================
+
+# How detailed technical documentation should be
+# Options: minimal | simple_overview | feature_guides | detailed_technical
+documentation_level: {documentation_level}
+
+# Development approach (speed vs robustness)
+# Options: speed_iteration | balanced_quality | robust_start | depends_feature
+development_approach: {development_approach}
+
+# ============================================================================
+# TECHNICAL STACK (FIXED)
+# ============================================================================
+# CoShip uses these technologies - this is not configurable
+
+tech_stack:
+  frontend: "React with Tailwind CSS"
+  backend: "Supabase (Auth, Database, Storage, Edge Functions)"
+  deployment: "TBD based on project needs"
+
+# ============================================================================
+# CONFIGURATION METADATA
+# ============================================================================
+
+# Version of CoShip this config was created with
+coship_version: "0.1.0"
+
+# Skill that created this configuration
+created_by: "cofounder-setup"
+
+# ============================================================================
+# PRODUCT VISION & DIRECTION
+# ============================================================================
+# These fields are populated by the define-vision skill
+
+# Vision lock setting - prevents accidental changes to core vision
+# Options: true | false
+# vision_locked: false
+
+# Vision page in Notion (parent page containing holistic company vision)
+# vision_page_url: ""
+
+# Versions database in Notion (child of Vision page)
+# Contains version documents (MVP, V2, V3, etc.) with Active checkbox
+# Query this database for Active=true to find current version
+# vision_database_url: ""
+
+# Product name
+# product_name: ""
+
+# Last time vision was updated
+# last_vision_update: ""
+
+# ============================================================================
+# GITHUB CONFIGURATION
+# ============================================================================
+# These fields are populated by the mvp-scoping skill
+
+# GitHub organization name
+# github_org: ""
+
+# Repository name
+# github_repo: ""
+
+# Full repository URL
+# github_repo_url: ""
+
+# Project board URL (for tracking issues)
+# github_project_url: ""
+
+# ============================================================================
+# SCOPING PREFERENCES
+# ============================================================================
+# These fields are populated by the mvp-scoping skill
+
+# How detailed to review issues during scoping
+# Options: batch | detailed
+# - batch: Approve groups of issues at once (faster)
+# - detailed: Work through each issue one by one (more control)
+# scoping_detail_level: batch
+
+# Notes and additional preferences
+notes: |
+  {additional_notes}

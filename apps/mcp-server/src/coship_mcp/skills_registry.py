@@ -1,0 +1,58 @@
+"""Skills registry — single source of truth for all CoShip skill metadata."""
+
+SKILLS_REGISTRY = [
+    {
+        "id": "matching",
+        "name": "Matching",
+        "step": 1,
+        "tier": "free",
+        "description": "Define Ship's personality and working style. Establish the working relationship in minutes, not months.",
+        "status": "available",
+        "icon_name": "users",
+    },
+    {
+        "id": "define",
+        "name": "Define",
+        "step": 2,
+        "tier": "free",
+        "description": "Transform your vision into a structured product roadmap with clear goals and success metrics.",
+        "status": "placeholder",
+        "icon_name": "document",
+    },
+    {
+        "id": "scope",
+        "name": "Scope",
+        "step": 3,
+        "tier": "pro",
+        "description": "Break your vision into focused, actionable work. Right-sized tasks to maintain momentum.",
+        "status": "coming_soon",
+        "icon_name": "checklist",
+    },
+    {
+        "id": "build",
+        "name": "Build",
+        "step": 4,
+        "tier": "pro",
+        "description": "Ship brings your vision to life with production-ready code while you focus on product decisions.",
+        "status": "coming_soon",
+        "icon_name": "code",
+    },
+    {
+        "id": "review",
+        "name": "Review",
+        "step": 5,
+        "tier": "pro",
+        "description": "Automated code review for security, performance, and best practices before your users see it.",
+        "status": "coming_soon",
+        "icon_name": "shield",
+    },
+    {
+        "id": "ship",
+        "name": "Ship",
+        "step": 6,
+        "tier": "pro",
+        "description": "Deploy with confidence using built-in CI/CD workflows. Production-ready from day one.",
+        "status": "coming_soon",
+        "icon_name": "globe",
+    },
+]

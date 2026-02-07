@@ -3,24 +3,33 @@ import { useState } from "react";
 import { getSupabaseServerClient } from "../utils/supabase";
 import { ShipLogo } from "./ShipLogo";
 
-const githubLoginFn = createServerFn({ method: "POST" }).handler(async () => {
-  const supabase = getSupabaseServerClient();
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "github",
-    options: {
-      scopes: "repo",
-      redirectTo: `${process.env.VITE_APP_URL || "http://localhost:3000"}/auth/callback`,
-    },
+const githubLoginFn = createServerFn({ method: "POST" })
+  .inputValidator((d: { returnTo?: string }) => d)
+  .handler(async ({ data }) => {
+    const supabase = getSupabaseServerClient();
+
+    const appUrl = process.env.VITE_APP_URL || "http://localhost:3000";
+    let redirectTo = `${appUrl}/auth/callback`;
+    if (data.returnTo) {
+      redirectTo += `?returnTo=${encodeURIComponent(data.returnTo)}`;
+    }
+
+    const { data: oauthData, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        scopes: "repo",
+        redirectTo,
+      },
+    });
+
+    if (error) {
+      return { error: true, message: error.message, url: null };
+    }
+
+    return { error: false, message: null, url: oauthData.url };
   });
 
-  if (error) {
-    return { error: true, message: error.message, url: null };
-  }
-
-  return { error: false, message: null, url: data.url };
-});
-
-export function Login() {
+export function Login({ returnTo }: { returnTo?: string }) {
   const [status, setStatus] = useState<"idle" | "pending" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -28,7 +37,7 @@ export function Login() {
     setStatus("pending");
     setError(null);
 
-    const result = await githubLoginFn();
+    const result = await githubLoginFn({ data: { returnTo } });
 
     if (result.error) {
       setStatus("error");
@@ -42,8 +51,15 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-dark-900">
-      <div className="w-full max-w-md">
+    <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-dark-950 via-dark-900 to-dark-950" />
+
+      {/* Animated background orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-ocean-500/10 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-ocean-600/10 rounded-full blur-3xl animate-float [animation-delay:-2s]" />
+
+      <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8 flex flex-col items-center">
           <ShipLogo size="xl" className="mb-4" />
           <h1 className="font-display text-3xl font-bold text-ocean-50 mb-2">

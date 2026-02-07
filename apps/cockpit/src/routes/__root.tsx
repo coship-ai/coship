@@ -39,7 +39,7 @@ function RootComponent() {
       <head>
         <HeadContent />
       </head>
-      <body className="min-h-screen bg-dark-900 text-ocean-50">
+      <body className="min-h-screen bg-dark-950 text-ocean-50">
         <Outlet />
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />

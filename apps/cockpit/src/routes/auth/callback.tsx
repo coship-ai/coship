@@ -3,7 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getSupabaseServerClient } from "../../utils/supabase";
 
 const handleCallbackFn = createServerFn({ method: "GET" })
-  .inputValidator((d: { code: string }) => d)
+  .inputValidator((d: { code: string; returnTo?: string }) => d)
   .handler(async ({ data }) => {
     const supabase = getSupabaseServerClient();
 
@@ -35,6 +35,11 @@ const handleCallbackFn = createServerFn({ method: "GET" })
         .eq("id", user.id);
     }
 
+    // If there's a returnTo URL (e.g. from MCP authorize flow), go there
+    if (data.returnTo) {
+      return { error: false, redirectTo: data.returnTo };
+    }
+
     // Check if user has any projects
     const { data: projects } = await supabase
       .from("projects")
@@ -53,13 +58,16 @@ const handleCallbackFn = createServerFn({ method: "GET" })
 export const Route = createFileRoute("/auth/callback")({
   loaderDeps: ({ search }) => ({
     code: (search as Record<string, string>).code,
+    returnTo: (search as Record<string, string>).returnTo,
   }),
   loader: async ({ deps }) => {
     if (!deps.code) {
       throw redirect({ to: "/login" });
     }
 
-    const result = await handleCallbackFn({ data: { code: deps.code } });
+    const result = await handleCallbackFn({
+      data: { code: deps.code, returnTo: deps.returnTo },
+    });
     throw redirect({ to: result.redirectTo });
   },
 });

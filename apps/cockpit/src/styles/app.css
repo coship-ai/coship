@@ -4,7 +4,7 @@
 /* Global styles */
 html, body {
   font-family: var(--font-family-sans);
-  background-color: var(--color-dark-900);
+  background-color: var(--color-dark-950);
   color: var(--color-ocean-50);
   min-height: 100vh;
   scroll-behavior: smooth;
@@ -22,7 +22,7 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-dark-900);
+  background: var(--color-dark-950);
 }
 
 ::-webkit-scrollbar-thumb {

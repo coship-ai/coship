@@ -13,7 +13,7 @@ import { Route as LogoutRouteImport } from './routes/logout'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as OauthConsentRouteImport } from './routes/oauth/consent'
+import { Route as McpAuthorizeRouteImport } from './routes/mcp/authorize'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as AuthedNewProjectRouteImport } from './routes/_authed/new-project'
 import { Route as AuthedCockpitRouteImport } from './routes/_authed/_cockpit'
@@ -42,9 +42,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OauthConsentRoute = OauthConsentRouteImport.update({
-  id: '/oauth/consent',
-  path: '/oauth/consent',
+const McpAuthorizeRoute = McpAuthorizeRouteImport.update({
+  id: '/mcp/authorize',
+  path: '/mcp/authorize',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthCallbackRoute = AuthCallbackRouteImport.update({
@@ -94,7 +94,7 @@ export interface FileRoutesByFullPath {
   '/logout': typeof LogoutRoute
   '/new-project': typeof AuthedNewProjectRoute
   '/auth/callback': typeof AuthCallbackRoute
-  '/oauth/consent': typeof OauthConsentRoute
+  '/mcp/authorize': typeof McpAuthorizeRoute
   '/analytics': typeof AuthedCockpitAnalyticsRoute
   '/autoship': typeof AuthedCockpitAutoshipRoute
   '/configuration': typeof AuthedCockpitConfigurationRoute
@@ -107,7 +107,7 @@ export interface FileRoutesByTo {
   '/logout': typeof LogoutRoute
   '/new-project': typeof AuthedNewProjectRoute
   '/auth/callback': typeof AuthCallbackRoute
-  '/oauth/consent': typeof OauthConsentRoute
+  '/mcp/authorize': typeof McpAuthorizeRoute
   '/analytics': typeof AuthedCockpitAnalyticsRoute
   '/autoship': typeof AuthedCockpitAutoshipRoute
   '/configuration': typeof AuthedCockpitConfigurationRoute
@@ -123,7 +123,7 @@ export interface FileRoutesById {
   '/_authed/_cockpit': typeof AuthedCockpitRouteWithChildren
   '/_authed/new-project': typeof AuthedNewProjectRoute
   '/auth/callback': typeof AuthCallbackRoute
-  '/oauth/consent': typeof OauthConsentRoute
+  '/mcp/authorize': typeof McpAuthorizeRoute
   '/_authed/_cockpit/analytics': typeof AuthedCockpitAnalyticsRoute
   '/_authed/_cockpit/autoship': typeof AuthedCockpitAutoshipRoute
   '/_authed/_cockpit/configuration': typeof AuthedCockpitConfigurationRoute
@@ -138,7 +138,7 @@ export interface FileRouteTypes {
     | '/logout'
     | '/new-project'
     | '/auth/callback'
-    | '/oauth/consent'
+    | '/mcp/authorize'
     | '/analytics'
     | '/autoship'
     | '/configuration'
@@ -151,7 +151,7 @@ export interface FileRouteTypes {
     | '/logout'
     | '/new-project'
     | '/auth/callback'
-    | '/oauth/consent'
+    | '/mcp/authorize'
     | '/analytics'
     | '/autoship'
     | '/configuration'
@@ -166,7 +166,7 @@ export interface FileRouteTypes {
     | '/_authed/_cockpit'
     | '/_authed/new-project'
     | '/auth/callback'
-    | '/oauth/consent'
+    | '/mcp/authorize'
     | '/_authed/_cockpit/analytics'
     | '/_authed/_cockpit/autoship'
     | '/_authed/_cockpit/configuration'
@@ -180,7 +180,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   LogoutRoute: typeof LogoutRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
-  OauthConsentRoute: typeof OauthConsentRoute
+  McpAuthorizeRoute: typeof McpAuthorizeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -213,11 +213,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/oauth/consent': {
-      id: '/oauth/consent'
-      path: '/oauth/consent'
-      fullPath: '/oauth/consent'
-      preLoaderRoute: typeof OauthConsentRouteImport
+    '/mcp/authorize': {
+      id: '/mcp/authorize'
+      path: '/mcp/authorize'
+      fullPath: '/mcp/authorize'
+      preLoaderRoute: typeof McpAuthorizeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/callback': {
@@ -318,7 +318,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   LogoutRoute: LogoutRoute,
   AuthCallbackRoute: AuthCallbackRoute,
-  OauthConsentRoute: OauthConsentRoute,
+  McpAuthorizeRoute: McpAuthorizeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

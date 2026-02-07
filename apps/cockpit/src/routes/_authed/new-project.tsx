@@ -151,9 +151,16 @@ function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-900 flex flex-col items-center px-4 py-12">
+    <div className="relative min-h-screen flex flex-col items-center px-4 py-12 overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-dark-950 via-dark-900 to-dark-950" />
+
+      {/* Animated background orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-ocean-500/10 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-ocean-600/10 rounded-full blur-3xl animate-float [animation-delay:-2s]" />
+
       {/* Progress dots */}
-      <div className="flex items-center gap-2 mb-12">
+      <div className="relative z-10 flex items-center gap-2 mb-12">
         {[1, 2, 3].map((s) => (
           <div
             key={s}
@@ -163,7 +170,7 @@ function OnboardingPage() {
           />
         ))}
       </div>
-      <div className="w-full max-w-lg">
+      <div className="relative z-10 w-full max-w-lg">
         <div className="text-center mb-8 flex flex-col items-center">
           <ShipLogo size="lg" className="mb-4" />
         </div>
