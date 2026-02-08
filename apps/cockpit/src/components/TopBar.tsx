@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { ProjectSelector } from "./ProjectSelector";
 
 const navItems = [
-  { label: "Cockpit", to: "/cockpit" as const },
+  { label: "Cockpit", to: "/" as const },
   { label: "AutoShip", to: "/autoship" as const, comingSoon: true },
   { label: "Analytics", to: "/analytics" as const, comingSoon: true },
 ];

@@ -51,7 +51,7 @@ const handleCallbackFn = createServerFn({ method: "GET" })
 
     return {
       error: false,
-      redirectTo: hasProjects ? "/cockpit" : "/new-project",
+      redirectTo: hasProjects ? "/" : "/new-project",
     };
   });
 

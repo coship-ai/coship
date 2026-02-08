@@ -85,7 +85,7 @@ const fetchDashboardData = createServerFn({ method: "GET" })
     };
   });
 
-export const Route = createFileRoute("/_authed/_cockpit/cockpit")({
+export const Route = createFileRoute("/_authed/_cockpit/")({
   loader: async ({ context }) => {
     return fetchDashboardData({ data: { userId: context.user!.id } });
   },

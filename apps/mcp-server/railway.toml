@@ -1,5 +1,8 @@
 [build]
 builder = "nixpacks"
+watchPatterns = ["apps/mcp-server/**"]
 
 [deploy]
 startCommand = "fastmcp run src/coship_mcp/server.py --transport http --port $PORT"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3

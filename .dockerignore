@@ -1,0 +1,15 @@
+node_modules
+**/node_modules
+.git
+dist
+**/dist
+.env
+.env.*
+.env.local
+apps/mcp-server/.venv
+apps/mcp-server/__pycache__
+**/__pycache__
+*.pyc
+.DS_Store
+**/.DS_Store
+supabase/.temp
