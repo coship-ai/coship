@@ -2,19 +2,20 @@
 import Container from '../ui/Container.astro';
 
 const features = [
-  { name: 'Cost', coship: 'From $125/mo', cofounder: '$0 (equity)', fractional: '$5-15k/mo', vibe: '$20-100/mo' },
+  { name: 'Cost', coship: 'From £199/mo', cofounder: 'Equity + sweat', fractional: '£3-10k/mo', vibe: '£20-100/mo' },
   { name: 'Equity required', coship: 'None', cofounder: '10-50%', fractional: 'Sometimes', vibe: 'None' },
-  { name: 'Availability', coship: '24/7 instant', cofounder: 'Their schedule', fractional: '10-20 hrs/wk', vibe: '24/7 instant' },
-  { name: 'Time to start', coship: 'Minutes', cofounder: '3-12 months', fractional: '2-4 weeks', vibe: 'Minutes' },
-  { name: 'Architecture quality', coship: 'Production-ready', cofounder: 'Varies', fractional: 'High', vibe: 'Often poor' },
+  { name: 'Availability', coship: '24/7 instant', cofounder: 'Depends on them', fractional: 'Part-time at best', vibe: '24/7 instant' },
+  { name: 'Time to start', coship: 'Minutes', cofounder: 'Months to find one', fractional: 'Weeks to months', vibe: 'Minutes' },
+  { name: 'Architecture quality', coship: 'Production-grade', cofounder: 'Depends on skills', fractional: 'High (if you find one)', vibe: 'Often poor' },
   { name: 'Security practices', coship: 'OWASP built-in', cofounder: 'Varies', fractional: 'Usually good', vibe: 'Often skipped' },
-  { name: 'Testing coverage', coship: 'Comprehensive', cofounder: 'Varies', fractional: 'Good', vibe: 'Minimal' },
-  { name: 'Scales with you', coship: 'Unlimited projects', cofounder: 'One venture', fractional: 'Limited hours', vibe: 'Yes' },
+  { name: 'You understand what\'s built', coship: 'Every decision explained', cofounder: 'Shared context', fractional: 'If they have time', vibe: 'Copy-paste, hope for the best' },
+  { name: 'Founder education', coship: 'Built into every step', cofounder: 'Peer learning', fractional: 'Some mentoring', vibe: 'None' },
+  { name: 'Scales with you', coship: 'Unlimited projects', cofounder: 'One venture', fractional: 'Per-project contracts', vibe: 'Yes' },
 ];
 
 const columns = [
   { key: 'coship', label: 'CoShip', highlight: true },
-  { key: 'cofounder', label: 'Technical Co-founder' },
+  { key: 'cofounder', label: 'Co-Founder' },
   { key: 'fractional', label: 'Fractional CTO' },
   { key: 'vibe', label: 'Vibe Coding' },
 ];
@@ -25,10 +26,10 @@ const columns = [
     <!-- Section header -->
     <div class="text-center max-w-3xl mx-auto mb-16">
       <h2 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-ocean-50 mb-6">
-        How CoShip Compares
+        Why Founders Are Switching to CoShip
       </h2>
       <p class="text-lg text-ocean-300">
-        The technical expertise you need, without the traditional trade-offs.
+        The technical expertise of a co-founder, the output of an agency, and the speed of AI—without the price tag, the equity, or the black box.
       </p>
     </div>
 
@@ -86,7 +87,7 @@ const columns = [
     <!-- Bottom CTA -->
     <div class="mt-16 text-center">
       <p class="text-ocean-300 mb-6">
-        Get the benefits of a technical co-founder without the search, the equity, or the compromise.
+        Every alternative either costs you a fortune, costs you equity, or costs you quality. CoShip gives you all three—and teaches you along the way.
       </p>
       <a
         href="#pricing"

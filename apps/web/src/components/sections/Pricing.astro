@@ -5,12 +5,12 @@ import Card from '../ui/Card.astro';
 import ShipLogo from '../icons/ShipLogo.astro';
 
 const coshipFeatures = [
-  'MCP Server access — skills delivered online',
-  'Architecture templates (SaaS, Mobile)',
-  'Personality & working style config',
-  'OWASP security best practices',
-  'Cockpit — manage your agent & projects',
-  'Continuous skill updates'
+  'Living skill library — always improving, always current',
+  'Production-grade architecture templates',
+  'Personalised CTO personality & working style',
+  'Enterprise-grade security (OWASP built-in)',
+  'Cockpit — command centre for all your projects',
+  'Founder education built into every workflow'
 ];
 
 const autoshipFeatures = [
@@ -30,10 +30,10 @@ const autoshipFeatures = [
     <!-- Section header -->
     <div class="text-center max-w-3xl mx-auto mb-6">
       <h2 class="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-ocean-50 mb-3">
-        Choose Your Plan
+        Invest in Your Product, Not Someone Else's Invoice
       </h2>
       <p class="text-ocean-300">
-        Start with Ship as your Agentic CTO today.
+        World-class technical leadership for less than a single day of contractor billing.
       </p>
     </div>
 
@@ -69,7 +69,7 @@ const autoshipFeatures = [
           </div>
           <div>
             <h3 class="font-display font-bold text-xl text-ocean-50">CoShip</h3>
-            <p class="text-ocean-400 text-xs">Your Agentic CTO</p>
+            <p class="text-ocean-400 text-xs">Your CTO in a Box</p>
           </div>
         </div>
 
@@ -77,33 +77,23 @@ const autoshipFeatures = [
         <div class="mb-4">
           <div class="flex items-center justify-center gap-1 mb-3 bg-dark-800/50 rounded-full p-1">
             <button class="plan-toggle active px-3 py-1.5 rounded-full text-xs font-medium transition-all" data-plan="lifetime">
-              Lifetime
+              Lifetime (Launch)
             </button>
             <button class="plan-toggle px-3 py-1.5 rounded-full text-xs font-medium transition-all" data-plan="monthly">
               Monthly
-            </button>
-            <button class="plan-toggle px-3 py-1.5 rounded-full text-xs font-medium transition-all" data-plan="yearly">
-              Yearly
-              <span class="ml-1 text-ocean-400">(Save 17%)</span>
             </button>
           </div>
 
           <!-- Lifetime price -->
           <div class="lifetime-price flex items-baseline gap-2 justify-center">
-            <span class="text-3xl font-display font-bold text-ocean-50" data-price="lifetime">$799</span>
+            <span class="text-3xl font-display font-bold text-ocean-50" data-price="lifetime">$899</span>
             <span class="text-ocean-400 text-xs">one-time</span>
           </div>
 
           <!-- Monthly price -->
           <div class="monthly-price hidden flex items-baseline gap-2 justify-center">
-            <span class="text-3xl font-display font-bold text-ocean-50" data-price="monthly">$125</span>
-            <span class="text-ocean-400 text-xs">/month per project</span>
-          </div>
-
-          <!-- Yearly price -->
-          <div class="yearly-price hidden flex items-baseline gap-2 justify-center">
-            <span class="text-3xl font-display font-bold text-ocean-50" data-price="yearly">$1249</span>
-            <span class="text-ocean-400 text-xs">/year unlimited projects</span>
+            <span class="text-3xl font-display font-bold text-ocean-50" data-price="monthly">$379</span>
+            <span class="text-ocean-400 text-xs">/month</span>
           </div>
         </div>
 
@@ -113,7 +103,7 @@ const autoshipFeatures = [
             <svg class="w-4 h-4 text-ocean-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p class="font-semibold text-ocean-200 text-xs">Less than a single day's contractor rate — get an always-available CTO for the price of 1-2 hours of consulting.</p>
+            <p class="font-semibold text-ocean-200 text-xs">Agencies, contractors, and fractional CTOs charge thousands for an MVP you don't fully own or understand. Ship delivers production-grade software for a fraction of the cost—and you'll know exactly how every piece works.</p>
           </div>
         </div>
 
@@ -133,15 +123,13 @@ const autoshipFeatures = [
         <div>
           <Button href="https://app.coship.dev" size="md" class="w-full justify-center">
             <span class="lifetime-cta">Claim Lifetime License</span>
-            <span class="monthly-cta hidden">Try for Free</span>
-            <span class="yearly-cta hidden">Try for Free</span>
+            <span class="monthly-cta hidden">Start Building</span>
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Button>
           <p class="lifetime-note text-center text-xs text-ocean-500 mt-2">Unlimited projects forever</p>
           <p class="monthly-note hidden text-center text-xs text-ocean-500 mt-2">Cancel anytime</p>
-          <p class="yearly-note hidden text-center text-xs text-ocean-500 mt-2">Cancel anytime</p>
         </div>
       </Card>
 
@@ -225,10 +213,10 @@ const autoshipFeatures = [
 
 <script>
   // Currency data
-  const currencies: Record<string, { symbol: string; lifetime: number; monthly: number; yearly: number }> = {
-    USD: { symbol: '$', lifetime: 899, monthly: 125, yearly: 1249 },
-    GBP: { symbol: '£', lifetime: 699, monthly: 99, yearly: 999 },
-    EUR: { symbol: '€', lifetime: 799, monthly: 115, yearly: 1149 }
+  const currencies: Record<string, { symbol: string; lifetime: number; monthly: number }> = {
+    USD: { symbol: '$', lifetime: 899, monthly: 379 },
+    GBP: { symbol: '£', lifetime: 699, monthly: 299 },
+    EUR: { symbol: '€', lifetime: 799, monthly: 349 }
   };
 
   let currentCurrency = 'USD';
@@ -257,33 +245,23 @@ const autoshipFeatures = [
       el.textContent = `${currency.symbol}${currency.monthly}`;
     });
 
-    // Update yearly prices
-    document.querySelectorAll('[data-price="yearly"]').forEach(el => {
-      el.textContent = `${currency.symbol}${currency.yearly}`;
-    });
   }
 
   function updatePlanDisplay() {
     const lifetimePrice = document.querySelector('.lifetime-price');
     const monthlyPrice = document.querySelector('.monthly-price');
-    const yearlyPrice = document.querySelector('.yearly-price');
     const lifetimeCta = document.querySelector('.lifetime-cta');
     const monthlyCta = document.querySelector('.monthly-cta');
-    const yearlyCta = document.querySelector('.yearly-cta');
     const lifetimeNote = document.querySelector('.lifetime-note');
     const monthlyNote = document.querySelector('.monthly-note');
-    const yearlyNote = document.querySelector('.yearly-note');
 
     // Hide all first
     lifetimePrice?.classList.add('hidden');
     monthlyPrice?.classList.add('hidden');
-    yearlyPrice?.classList.add('hidden');
     lifetimeCta?.classList.add('hidden');
     monthlyCta?.classList.add('hidden');
-    yearlyCta?.classList.add('hidden');
     lifetimeNote?.classList.add('hidden');
     monthlyNote?.classList.add('hidden');
-    yearlyNote?.classList.add('hidden');
 
     // Show based on current plan
     if (currentPlan === 'lifetime') {
@@ -294,10 +272,6 @@ const autoshipFeatures = [
       monthlyPrice?.classList.remove('hidden');
       monthlyCta?.classList.remove('hidden');
       monthlyNote?.classList.remove('hidden');
-    } else if (currentPlan === 'yearly') {
-      yearlyPrice?.classList.remove('hidden');
-      yearlyCta?.classList.remove('hidden');
-      yearlyNote?.classList.remove('hidden');
     }
   }
 

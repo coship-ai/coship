@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 
 export default defineConfig({
   server: {
@@ -14,6 +15,9 @@ export default defineConfig({
       projects: ["./tsconfig.json"],
     }),
     tanstackStart(),
+    nitroV2Plugin({
+      preset: "node-server",
+    }),
     viteReact(),
   ],
 });

@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "start": "npx serve dist -s -l tcp://0.0.0.0:${PORT:-3000}",
     "astro": "astro"
   },
   "dependencies": {
@@ -13,6 +14,7 @@
     "@coship/ui": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.15",
+    "serve": "^14.2.4",
     "tailwindcss": "^4.1.18"
   }
 }

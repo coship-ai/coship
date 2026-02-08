@@ -8,7 +8,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { createServerFn } from "@tanstack/react-start";
 import { getSupabaseServerClient } from "../utils/supabase";
 import type { User } from "@supabase/supabase-js";
-import appCss from "../styles/app.css?url";
+import "../styles/app.css";
 
 // Server function to get current user
 const fetchUser = createServerFn({ method: "GET" }).handler(async () => {
@@ -24,7 +24,6 @@ export const Route = createRootRouteWithContext<{ user: User | null }>()({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "CoShip - Your Agentic Co-founder" },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
   }),
   beforeLoad: async () => {
     const user = await fetchUser();
