@@ -407,7 +407,7 @@ function OnboardingPage() {
                 </a>
 
                 <button
-                  onClick={() => navigate({ to: "/dashboard" })}
+                  onClick={() => navigate({ to: "/cockpit" })}
                   className="w-full btn btn-primary py-3"
                 >
                   Start Shipping!

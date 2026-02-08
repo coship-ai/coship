@@ -176,6 +176,10 @@ Key tables:
 - `profiles` - User profiles with subscription tier
 - Triggers sync `subscription_tier` to JWT `app_metadata`
 
+## Interaction Model
+
+CoShip is **synchronous and user-driven**. The founder using Claude Desktop drives all interactions — Ship responds to their requests via MCP skills. There is no autonomous/async agent behavior. Autonomous features (e.g. AutoShip with async updates) are a future product tier, not part of the current architecture.
+
 ## Deployment
 
 - **Landing Page**: Vercel/Netlify (static)

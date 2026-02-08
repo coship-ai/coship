@@ -9,6 +9,14 @@ SKILLS_REGISTRY = [
         "description": "Define Ship's personality and working style. Establish the working relationship in minutes, not months.",
         "status": "available",
         "icon_name": "users",
+        "triggers": [
+            "Can you start matching with CoShip?",
+            "Set up Ship",
+            "Configure my co-founder",
+            "Begin the CoShip process",
+            "Let's start building",
+            "Can you match me?",
+        ],
     },
     {
         "id": "define",
@@ -18,6 +26,11 @@ SKILLS_REGISTRY = [
         "description": "Transform your vision into a structured product roadmap with clear goals and success metrics.",
         "status": "placeholder",
         "icon_name": "document",
+        "triggers": [
+            "Can you help me define my product?",
+            "Create a product roadmap",
+            "Define the vision",
+        ],
     },
     {
         "id": "scope",
@@ -27,6 +40,11 @@ SKILLS_REGISTRY = [
         "description": "Break your vision into focused, actionable work. Right-sized tasks to maintain momentum.",
         "status": "coming_soon",
         "icon_name": "checklist",
+        "triggers": [
+            "Can you scope out the next sprint?",
+            "Break this into tasks",
+            "What should I build next?",
+        ],
     },
     {
         "id": "build",
@@ -36,6 +54,11 @@ SKILLS_REGISTRY = [
         "description": "Ship brings your vision to life with production-ready code while you focus on product decisions.",
         "status": "coming_soon",
         "icon_name": "code",
+        "triggers": [
+            "Can you start building this feature?",
+            "Start building",
+            "Let's code this",
+        ],
     },
     {
         "id": "review",
@@ -45,6 +68,11 @@ SKILLS_REGISTRY = [
         "description": "Automated code review for security, performance, and best practices before your users see it.",
         "status": "coming_soon",
         "icon_name": "shield",
+        "triggers": [
+            "Can you review my code?",
+            "Check for issues",
+            "Run a code review",
+        ],
     },
     {
         "id": "ship",
@@ -54,5 +82,10 @@ SKILLS_REGISTRY = [
         "description": "Deploy with confidence using built-in CI/CD workflows. Production-ready from day one.",
         "status": "coming_soon",
         "icon_name": "globe",
+        "triggers": [
+            "Can you deploy this to production?",
+            "Ship it",
+            "Let's go live",
+        ],
     },
 ]

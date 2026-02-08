@@ -18,8 +18,7 @@ import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as AuthedNewProjectRouteImport } from './routes/_authed/new-project'
 import { Route as AuthedCockpitRouteImport } from './routes/_authed/_cockpit'
 import { Route as AuthedCockpitSettingsRouteImport } from './routes/_authed/_cockpit/settings'
-import { Route as AuthedCockpitDashboardRouteImport } from './routes/_authed/_cockpit/dashboard'
-import { Route as AuthedCockpitConfigurationRouteImport } from './routes/_authed/_cockpit/configuration'
+import { Route as AuthedCockpitCockpitRouteImport } from './routes/_authed/_cockpit/cockpit'
 import { Route as AuthedCockpitAutoshipRouteImport } from './routes/_authed/_cockpit/autoship'
 import { Route as AuthedCockpitAnalyticsRouteImport } from './routes/_authed/_cockpit/analytics'
 
@@ -66,17 +65,11 @@ const AuthedCockpitSettingsRoute = AuthedCockpitSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AuthedCockpitRoute,
 } as any)
-const AuthedCockpitDashboardRoute = AuthedCockpitDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const AuthedCockpitCockpitRoute = AuthedCockpitCockpitRouteImport.update({
+  id: '/cockpit',
+  path: '/cockpit',
   getParentRoute: () => AuthedCockpitRoute,
 } as any)
-const AuthedCockpitConfigurationRoute =
-  AuthedCockpitConfigurationRouteImport.update({
-    id: '/configuration',
-    path: '/configuration',
-    getParentRoute: () => AuthedCockpitRoute,
-  } as any)
 const AuthedCockpitAutoshipRoute = AuthedCockpitAutoshipRouteImport.update({
   id: '/autoship',
   path: '/autoship',
@@ -97,8 +90,7 @@ export interface FileRoutesByFullPath {
   '/mcp/authorize': typeof McpAuthorizeRoute
   '/analytics': typeof AuthedCockpitAnalyticsRoute
   '/autoship': typeof AuthedCockpitAutoshipRoute
-  '/configuration': typeof AuthedCockpitConfigurationRoute
-  '/dashboard': typeof AuthedCockpitDashboardRoute
+  '/cockpit': typeof AuthedCockpitCockpitRoute
   '/settings': typeof AuthedCockpitSettingsRoute
 }
 export interface FileRoutesByTo {
@@ -110,8 +102,7 @@ export interface FileRoutesByTo {
   '/mcp/authorize': typeof McpAuthorizeRoute
   '/analytics': typeof AuthedCockpitAnalyticsRoute
   '/autoship': typeof AuthedCockpitAutoshipRoute
-  '/configuration': typeof AuthedCockpitConfigurationRoute
-  '/dashboard': typeof AuthedCockpitDashboardRoute
+  '/cockpit': typeof AuthedCockpitCockpitRoute
   '/settings': typeof AuthedCockpitSettingsRoute
 }
 export interface FileRoutesById {
@@ -126,8 +117,7 @@ export interface FileRoutesById {
   '/mcp/authorize': typeof McpAuthorizeRoute
   '/_authed/_cockpit/analytics': typeof AuthedCockpitAnalyticsRoute
   '/_authed/_cockpit/autoship': typeof AuthedCockpitAutoshipRoute
-  '/_authed/_cockpit/configuration': typeof AuthedCockpitConfigurationRoute
-  '/_authed/_cockpit/dashboard': typeof AuthedCockpitDashboardRoute
+  '/_authed/_cockpit/cockpit': typeof AuthedCockpitCockpitRoute
   '/_authed/_cockpit/settings': typeof AuthedCockpitSettingsRoute
 }
 export interface FileRouteTypes {
@@ -141,8 +131,7 @@ export interface FileRouteTypes {
     | '/mcp/authorize'
     | '/analytics'
     | '/autoship'
-    | '/configuration'
-    | '/dashboard'
+    | '/cockpit'
     | '/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,8 +143,7 @@ export interface FileRouteTypes {
     | '/mcp/authorize'
     | '/analytics'
     | '/autoship'
-    | '/configuration'
-    | '/dashboard'
+    | '/cockpit'
     | '/settings'
   id:
     | '__root__'
@@ -169,8 +157,7 @@ export interface FileRouteTypes {
     | '/mcp/authorize'
     | '/_authed/_cockpit/analytics'
     | '/_authed/_cockpit/autoship'
-    | '/_authed/_cockpit/configuration'
-    | '/_authed/_cockpit/dashboard'
+    | '/_authed/_cockpit/cockpit'
     | '/_authed/_cockpit/settings'
   fileRoutesById: FileRoutesById
 }
@@ -248,18 +235,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedCockpitSettingsRouteImport
       parentRoute: typeof AuthedCockpitRoute
     }
-    '/_authed/_cockpit/dashboard': {
-      id: '/_authed/_cockpit/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthedCockpitDashboardRouteImport
-      parentRoute: typeof AuthedCockpitRoute
-    }
-    '/_authed/_cockpit/configuration': {
-      id: '/_authed/_cockpit/configuration'
-      path: '/configuration'
-      fullPath: '/configuration'
-      preLoaderRoute: typeof AuthedCockpitConfigurationRouteImport
+    '/_authed/_cockpit/cockpit': {
+      id: '/_authed/_cockpit/cockpit'
+      path: '/cockpit'
+      fullPath: '/cockpit'
+      preLoaderRoute: typeof AuthedCockpitCockpitRouteImport
       parentRoute: typeof AuthedCockpitRoute
     }
     '/_authed/_cockpit/autoship': {
@@ -282,16 +262,14 @@ declare module '@tanstack/react-router' {
 interface AuthedCockpitRouteChildren {
   AuthedCockpitAnalyticsRoute: typeof AuthedCockpitAnalyticsRoute
   AuthedCockpitAutoshipRoute: typeof AuthedCockpitAutoshipRoute
-  AuthedCockpitConfigurationRoute: typeof AuthedCockpitConfigurationRoute
-  AuthedCockpitDashboardRoute: typeof AuthedCockpitDashboardRoute
+  AuthedCockpitCockpitRoute: typeof AuthedCockpitCockpitRoute
   AuthedCockpitSettingsRoute: typeof AuthedCockpitSettingsRoute
 }
 
 const AuthedCockpitRouteChildren: AuthedCockpitRouteChildren = {
   AuthedCockpitAnalyticsRoute: AuthedCockpitAnalyticsRoute,
   AuthedCockpitAutoshipRoute: AuthedCockpitAutoshipRoute,
-  AuthedCockpitConfigurationRoute: AuthedCockpitConfigurationRoute,
-  AuthedCockpitDashboardRoute: AuthedCockpitDashboardRoute,
+  AuthedCockpitCockpitRoute: AuthedCockpitCockpitRoute,
   AuthedCockpitSettingsRoute: AuthedCockpitSettingsRoute,
 }
 

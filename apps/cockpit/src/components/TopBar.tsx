@@ -3,8 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { ProjectSelector } from "./ProjectSelector";
 
 const navItems = [
-  { label: "Dashboard", to: "/dashboard" as const },
-  { label: "Configuration", to: "/configuration" as const },
+  { label: "Cockpit", to: "/cockpit" as const },
   { label: "AutoShip", to: "/autoship" as const, comingSoon: true },
   { label: "Analytics", to: "/analytics" as const, comingSoon: true },
 ];

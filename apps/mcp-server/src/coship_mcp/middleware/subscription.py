@@ -2,6 +2,13 @@
 
 from fastmcp.server.middleware import Middleware, MiddlewareContext
 
+from coship_mcp.skills_registry import SKILLS_REGISTRY
+
+# Derive pro skills from the single source of truth
+PRO_SKILLS = {
+    s["id"] for s in SKILLS_REGISTRY if s["tier"] == "pro" and s["status"] == "available"
+}
+
 
 class SubscriptionTierMiddleware(Middleware):
     """Middleware that filters skills based on user subscription tier.
@@ -15,8 +22,7 @@ class SubscriptionTierMiddleware(Middleware):
     We determine tier by checking which directory the skill came from.
     """
 
-    # Map skill names to their tiers (populated at startup or checked dynamically)
-    PRO_SKILLS = {"code-review", "deployment"}
+    PRO_SKILLS = PRO_SKILLS
 
     def _get_tier_from_context(self, context: MiddlewareContext) -> str:
         """Extract subscription tier from request context.
@@ -66,8 +72,7 @@ class SubscriptionTierMiddleware(Middleware):
         # Check if this is a resources/read request
         if context.method == "resources/read":
             tier = self._get_tier_from_context(context)
-            params = context.message.params or {}
-            uri = str(params.get("uri", ""))
+            uri = str(getattr(context.message, "uri", ""))
 
             if not self._is_skill_allowed(uri, tier):
                 raise PermissionError(
