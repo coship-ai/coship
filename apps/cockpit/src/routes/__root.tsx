@@ -24,6 +24,10 @@ export const Route = createRootRouteWithContext<{ user: User | null }>()({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "CoShip - Your Agentic Co-founder" },
     ],
+    links: [
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
+    ],
   }),
   beforeLoad: async () => {
     const user = await fetchUser();

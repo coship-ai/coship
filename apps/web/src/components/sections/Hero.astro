@@ -5,7 +5,7 @@ import Button from '../ui/Button.astro';
 import Container from '../ui/Container.astro';
 ---
 
-<section class="relative min-h-screen flex items-center justify-center pt-20 pb-16 overflow-hidden">
+<section class="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden">
   <!-- Background gradient -->
   <div class="absolute inset-0 bg-gradient-to-b from-dark-950 via-dark-900 to-dark-950"></div>
 
@@ -16,20 +16,22 @@ import Container from '../ui/Container.astro';
   <Container class="relative z-10">
     <div class="flex flex-col items-center text-center max-w-4xl mx-auto">
       <!-- Logo -->
-      <div class="mb-8 animate-fade-in-up">
-        <ShipLogo size="xl" class="text-ocean-400" />
+      <div class="mb-6 animate-fade-in-up">
+        <ShipLogo size="lg" class="text-ocean-400" />
       </div>
 
       <!-- Headline -->
-      <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-ocean-50 mb-10 animate-fade-in-up" style="animation-delay: 0.1s;">
-        Meet Ship.
-        <span class="block text-2xl sm:text-3xl md:text-4xl bg-gradient-to-r from-ocean-400 to-accent-bright bg-clip-text text-transparent pt-2 pb-4 font-semibold">
-          A CTO you can actually afford
-        </span>
+      <h1 class="font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ocean-50 mb-4 animate-fade-in-up leading-[1.1]" style="animation-delay: 0.1s;">
+        Your Idea Deserves a&nbsp;Co&#8209;Founder.
       </h1>
 
+      <!-- Subtitle -->
+      <p class="text-xl sm:text-2xl md:text-3xl bg-gradient-to-r from-ocean-400 to-accent-bright bg-clip-text text-transparent font-display font-semibold mb-8 animate-fade-in-up" style="animation-delay: 0.15s;">
+        Meet Ship.
+      </p>
+
       <!-- Powered by Claude badge -->
-      <div class="flex items-center gap-3 mb-10 animate-fade-in-up" style="animation-delay: 0.15s;">
+      <div class="flex items-center gap-3 mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
         <a
           href="https://claude.ai"
           target="_blank"
@@ -48,8 +50,8 @@ import Container from '../ui/Container.astro';
       </div>
 
       <!-- Subheadline -->
-      <p class="text-base sm:text-lg text-ocean-300 max-w-xl mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
-        Ship production-grade software with an Agentic CTO that plans, builds, and evolves your product with you.
+      <p class="text-base sm:text-lg text-ocean-300 max-w-xl mb-8 animate-fade-in-up" style="animation-delay: 0.25s;">
+        Ship is an Agentic Co-Founder. An AI partner that plans your product, builds it with you, and helps you understand every decision along the way.
       </p>
 
       <!-- CTAs -->
@@ -65,10 +67,10 @@ import Container from '../ui/Container.astro';
         </Button>
       </div>
 
-      <!-- Social proof -->
-      <p class="mt-8 text-ocean-400 text-sm italic animate-fade-in-up" style="animation-delay: 0.35s;">
-        "I replaced my agency, and three Slack channels of confusion with Ship. Better code, full understanding of my product, and I'm saving thousands a month."
-        <span class="block mt-1 text-ocean-500 not-italic text-xs">— Solo Founder, SaaS</span>
+      <!-- Trust statement -->
+      <p class="mt-6 text-ocean-400 text-sm animate-fade-in-up" style="animation-delay: 0.35s;">
+        Trusted by solo founders building real products.
+        <span class="block mt-1 text-ocean-500 text-xs">No equity. No agencies. No guesswork.</span>
       </p>
     </div>
   </Container>

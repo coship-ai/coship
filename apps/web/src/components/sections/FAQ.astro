@@ -9,11 +9,11 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     question: 'Why not hire a co-founder, fractional CTO, or agency?',
-    answer: 'A technical co-founder takes months to find and costs 10-50% equity. Agencies and contractors charge £5-15k per month, take weeks to onboard, and hand you code you don\'t understand. Fractional CTOs give you 10-20 hours a week at best. Every option is either slow, expensive, or leaves you dependent. CoShip delivers production-grade output at a fraction of the cost—and because Ship explains every decision, you walk away with the technical knowledge to own your product completely.'
+    answer: 'A technical co-founder takes months to find and costs 10-50% equity. Agencies and contractors charge <span data-faq-price="agency-range"></span> per month, take weeks to onboard, and hand you code you don\'t understand. Fractional CTOs give you 10-20 hours a week at best. Every option is either slow, expensive, or leaves you dependent. CoShip delivers production-grade output at a fraction of the cost—and because Ship explains every decision, you walk away with the technical knowledge to own your product completely.'
   },
   {
     question: 'How is this different from using Claude directly?',
-    answer: 'Using Claude directly is like hiring a brilliant consultant who has amnesia between meetings. Ship is a configured CTO with deep context about your product, your architecture, and your working style. It challenges your ideas, maintains continuity across sessions, and educates you on every technical decision. It\'s the difference between a general-purpose tool and a dedicated technical co-founder who knows your business inside out.'
+    answer: 'Using Claude directly is like hiring a brilliant consultant who has amnesia between meetings. Ship is a configured co-founder with deep context about your product, your architecture, and your working style. It challenges your ideas, maintains continuity across sessions, and educates you on every technical decision. It\'s the difference between a general-purpose tool and a dedicated technical co-founder who knows your business inside out.'
   },
   {
     question: 'What are CoShip templates?',
@@ -25,19 +25,19 @@ const faqs: FAQItem[] = [
   },
   {
     question: 'How are skills delivered?',
-    answer: 'CoShip skills are delivered via MCP (Model Context Protocol) and live online—always current, always improving. When we release new capabilities or enhance existing ones, you get access automatically. No downloads, no manual updates, no version management. Connect Claude to your CoShip MCP server and you\'re building with the latest tools immediately.'
+    answer: 'CoShip skills are delivered as cloud-connected tools that live online — always current, always improving. When we release new capabilities or enhance existing ones, you get access automatically. No downloads, no manual updates, no version management. Connect Claude to CoShip and you\'re building with the latest tools immediately.'
   },
   {
     question: 'What\'s the Autonomous tier?',
-    answer: 'AutoShip is our upcoming tier where Ship works independently. Instead of you driving each session, Ship executes tasks autonomously—learning from your feedback, shipping features, and providing daily progress reports. Think of CoShip as "building with an elite CTO" and AutoShip as "delegating to a capable technical team." Coming soon.'
+    answer: 'AutoShip is our upcoming tier where Ship works independently. Instead of you driving each session, Ship executes tasks autonomously—learning from your feedback, shipping features, and providing daily progress reports. Think of CoShip as "building with an expert co-founder" and AutoShip as "delegating to a capable technical team." Coming soon.'
   },
   {
     question: 'Can I use this for multiple projects?',
-    answer: 'Absolutely. Lifetime license holders get unlimited projects forever. Yearly subscribers also get unlimited projects. Monthly plans are priced per project at £199/mo. Each project gets its own Ship personality, context, and architecture—so you can run multiple products simultaneously without any bleed between them.'
+    answer: 'Absolutely. Lifetime licence holders get unlimited projects forever. Annual subscribers also get unlimited projects. Monthly plans are licensed per project at <span data-faq-price="monthly"></span>/mo. Each project gets its own Ship personality, context, and architecture—so you can run multiple products simultaneously without any bleed between them.'
   },
   {
     question: 'What\'s included in CoShip?',
-    answer: 'Full access to our MCP server with a growing library of CTO-grade skills: production architecture templates, workflow automation, security auditing, deployment pipelines, and personality configuration. Every skill includes founder education—Ship doesn\'t just do the work, it teaches you why it\'s done that way. Lifetime holders get every current and future skill update forever.'
+    answer: 'Full access to a growing library of co-founder-grade skills: production architecture templates, workflow automation, security auditing, one-click deployment, and personality configuration. Every skill includes founder education—Ship doesn\'t just do the work, it teaches you why it\'s done that way. Lifetime holders get every current and future skill update forever.'
   }
 ];
 
@@ -87,8 +87,7 @@ const faqSchema = {
             </span>
           </button>
           <div class="faq-content hidden">
-            <div class="px-6 pb-6 text-ocean-300 leading-relaxed">
-              {faq.answer}
+            <div class="px-6 pb-6 text-ocean-300 leading-relaxed" set:html={faq.answer}>
             </div>
           </div>
         </div>
@@ -98,6 +97,26 @@ const faqSchema = {
 </section>
 
 <script>
+  // Populate FAQ price spans from global currency data
+  function updateFaqPrices() {
+    const currencies = (window as any).coshipCurrencies;
+    const current = (window as any).coshipCurrentCurrency || 'USD';
+    if (!currencies) return;
+    const c = currencies[current];
+
+    document.querySelectorAll('[data-faq-price]').forEach(el => {
+      const key = el.getAttribute('data-faq-price');
+      if (key === 'monthly') {
+        el.textContent = `${c.symbol}${c.monthly}`;
+      } else if (key === 'agency-range') {
+        el.textContent = `${c.symbol}3,000–${c.symbol}10,000+`;
+      }
+    });
+  }
+
+  updateFaqPrices();
+  window.addEventListener('coship:currency-change', updateFaqPrices);
+
   document.querySelectorAll('.faq-trigger').forEach(trigger => {
     trigger.addEventListener('click', () => {
       const item = trigger.closest('.faq-item');

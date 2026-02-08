@@ -178,12 +178,9 @@ function OnboardingPage() {
         {/* Step 1: Project Name */}
         {step === 1 && (
           <div className="bg-dark-800 rounded-xl p-8 border border-dark-600">
-            <h1 className="font-display text-2xl font-bold text-ocean-50 mb-2">
+            <h1 className="font-display text-2xl font-bold text-ocean-50 mb-6">
               Name your project
             </h1>
-            <p className="text-ocean-400 mb-6 text-sm">
-              This will be your GitHub repository name.
-            </p>
 
             <div className="space-y-4">
               <div>
@@ -199,16 +196,19 @@ function OnboardingPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-3 bg-dark-700 border border-dark-500 rounded-lg text-ocean-50 placeholder-ocean-600 focus:outline-none focus:border-ocean-500 transition-colors"
-                  placeholder="my-saas-app"
+                  placeholder="My SaaS App"
                   autoFocus
                 />
               </div>
 
-              {slug && (
-                <p className="text-ocean-500 text-xs">
-                  Repository: <span className="text-ocean-300">{slug}</span>
+              <div className="flex items-start gap-3 rounded-lg bg-ocean-500/10 border border-ocean-500/20 px-4 py-3">
+                <svg className="w-5 h-5 text-ocean-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-ocean-300 text-sm leading-relaxed">
+                  Your project code will be stored on <span className="text-ocean-200 font-medium">GitHub</span> — a secure online home for your app's files. You won't need to touch it directly, we handle everything for you.
                 </p>
-              )}
+              </div>
 
               <button
                 onClick={() => setStep(2)}

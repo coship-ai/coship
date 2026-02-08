@@ -2,12 +2,12 @@
 import Container from '../ui/Container.astro';
 
 const features = [
-  { name: 'Cost', coship: 'From £199/mo', cofounder: 'Equity + sweat', fractional: '£3-10k/mo', vibe: '£20-100/mo' },
+  { name: 'Cost', coship: '', cofounder: 'Equity + sweat', fractional: '', vibe: '' },
   { name: 'Equity required', coship: 'None', cofounder: '10-50%', fractional: 'Sometimes', vibe: 'None' },
   { name: 'Availability', coship: '24/7 instant', cofounder: 'Depends on them', fractional: 'Part-time at best', vibe: '24/7 instant' },
   { name: 'Time to start', coship: 'Minutes', cofounder: 'Months to find one', fractional: 'Weeks to months', vibe: 'Minutes' },
   { name: 'Architecture quality', coship: 'Production-grade', cofounder: 'Depends on skills', fractional: 'High (if you find one)', vibe: 'Often poor' },
-  { name: 'Security practices', coship: 'OWASP built-in', cofounder: 'Varies', fractional: 'Usually good', vibe: 'Often skipped' },
+  { name: 'Security practices', coship: 'Best-practice security built in', cofounder: 'Varies', fractional: 'Usually good', vibe: 'Often skipped' },
   { name: 'You understand what\'s built', coship: 'Every decision explained', cofounder: 'Shared context', fractional: 'If they have time', vibe: 'Copy-paste, hope for the best' },
   { name: 'Founder education', coship: 'Built into every step', cofounder: 'Peer learning', fractional: 'Some mentoring', vibe: 'None' },
   { name: 'Scales with you', coship: 'Unlimited projects', cofounder: 'One venture', fractional: 'Per-project contracts', vibe: 'Yes' },
@@ -53,7 +53,10 @@ const columns = [
                 {feature.name}
               </td>
               {columns.map((col) => (
-                <td class={`p-4 text-center text-sm border-b ${col.highlight ? 'text-ocean-50 bg-ocean-500/5 border-ocean-500/20 font-medium' : 'text-ocean-400 border-dark-700/50'}`}>
+                <td
+                  class={`p-4 text-center text-sm border-b ${col.highlight ? 'text-ocean-50 bg-ocean-500/5 border-ocean-500/20 font-medium' : 'text-ocean-400 border-dark-700/50'}`}
+                  {...(feature.name === 'Cost' && col.key !== 'cofounder' ? { 'data-compare-price': col.key } : {})}
+                >
                   {feature[col.key as keyof typeof feature]}
                 </td>
               ))}
@@ -74,7 +77,10 @@ const columns = [
             {features.map((feature) => (
               <div class="flex justify-between items-center py-2 border-b border-dark-700/50 last:border-0">
                 <dt class="text-ocean-400 text-sm">{feature.name}</dt>
-                <dd class={`text-sm font-medium ${col.highlight ? 'text-ocean-50' : 'text-ocean-300'}`}>
+                <dd
+                  class={`text-sm font-medium ${col.highlight ? 'text-ocean-50' : 'text-ocean-300'}`}
+                  {...(feature.name === 'Cost' && col.key !== 'cofounder' ? { 'data-compare-price': col.key } : {})}
+                >
                   {feature[col.key as keyof typeof feature]}
                 </dd>
               </div>
@@ -101,3 +107,26 @@ const columns = [
     </div>
   </Container>
 </section>
+
+<script>
+  function updateComparisonPrices() {
+    const currencies = (window as any).coshipCurrencies;
+    const current = (window as any).coshipCurrentCurrency || 'USD';
+    if (!currencies) return;
+    const c = currencies[current];
+
+    document.querySelectorAll('[data-compare-price]').forEach(el => {
+      const key = el.getAttribute('data-compare-price');
+      if (key === 'coship') {
+        el.textContent = `From ${c.symbol}${c.monthly}/mo`;
+      } else if (key === 'fractional') {
+        el.textContent = `${c.symbol}3-10k/mo`;
+      } else if (key === 'vibe') {
+        el.textContent = `${c.symbol}20-100/mo`;
+      }
+    });
+  }
+
+  updateComparisonPrices();
+  window.addEventListener('coship:currency-change', updateComparisonPrices);
+</script>

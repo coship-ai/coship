@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = 'CoShip — Your CTO in a Box',
-  description = 'The technical co-founder you\'ve been searching for. CoShip delivers production-grade software, strategic product guidance, and a technical education—for a fraction of what agencies charge. Powered by Claude.'
+  title = 'CoShip — Your Agentic Co-Founder',
+  description = 'Stop building alone. CoShip is the agentic co-founder that plans, builds, and evolves your product with you — and helps you understand every decision. Production-grade software for a fraction of what agencies charge.'
 } = Astro.props;
 
 const siteUrl = 'https://coship.dev';
@@ -19,26 +19,26 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "CoShip",
-  "description": "Your CTO in a Box — production-grade software, strategic guidance, and technical education for non-technical founders",
+  "description": "Your agentic co-founder — production-grade software, strategic guidance, and technical education for non-technical founders",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "macOS",
   "offers": [
     {
       "@type": "Offer",
-      "name": "Lifetime License",
-      "price": "1899",
+      "name": "Lifetime Licence",
+      "price": "749",
       "priceCurrency": "USD"
     },
     {
       "@type": "Offer",
-      "name": "Pro Monthly",
+      "name": "Monthly (per project)",
       "price": "249",
       "priceCurrency": "USD"
     },
     {
       "@type": "Offer",
-      "name": "Pro Yearly",
-      "price": "2490",
+      "name": "Annual (unlimited projects)",
+      "price": "1249",
       "priceCurrency": "USD"
     }
   ]
@@ -82,6 +82,26 @@ const structuredData = {
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <!-- Global currency source of truth -->
+    <script is:inline>
+      window.coshipCurrencies = {
+        USD: { symbol: '$', lifetime: 749, monthly: 249, annual: 1249 },
+        GBP: { symbol: '\u00a3', lifetime: 599, monthly: 199, annual: 999 },
+        EUR: { symbol: '\u20ac', lifetime: 699, monthly: 229, annual: 1149 }
+      };
+      (function() {
+        var locale = navigator.language.toLowerCase();
+        var euroCountries = ['de','fr','es','it','nl','be','at','ie','pt','fi','gr','lu','mt','sk','si','ee','lv','lt','cy'];
+        if (locale.includes('gb') || locale === 'en-gb') {
+          window.coshipCurrentCurrency = 'GBP';
+        } else if (euroCountries.some(function(c) { return locale.includes(c); })) {
+          window.coshipCurrentCurrency = 'EUR';
+        } else {
+          window.coshipCurrentCurrency = 'USD';
+        }
+      })();
+    </script>
 
     <title>{title}</title>
   </head>
