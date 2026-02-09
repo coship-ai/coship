@@ -547,6 +547,7 @@ async def healthcheck(request: Request) -> JSONResponse:
 def create_app():
     """Create the combined ASGI app: MCP + custom API routes."""
     from starlette.routing import Route
+    from starlette.types import Receive, Scope, Send
 
     mcp_app = mcp.http_app(path="/")
 
@@ -555,7 +556,26 @@ def create_app():
     mcp_app.routes.insert(0, Route("/api/skills", api_skills, methods=["GET"]))
     mcp_app.routes.insert(0, Route("/api/mcp/token", api_mcp_token, methods=["POST"]))
 
-    return mcp_app
+    # Wrap with debug middleware to log auth headers on all requests
+    inner_app = mcp_app
+
+    async def debug_wrapper(scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] == "http":
+            headers = dict(scope.get("headers", []))
+            path = scope.get("path", "")
+            method = scope.get("method", "")
+            has_auth = b"authorization" in headers
+            auth_preview = ""
+            if has_auth:
+                auth_val = headers[b"authorization"].decode("utf-8", errors="replace")
+                auth_preview = auth_val[:50] + "..."
+            logging.getLogger("coship.debug").warning(
+                "REQ %s %s | auth_header=%s | preview=%s",
+                method, path, has_auth, auth_preview,
+            )
+        await inner_app(scope, receive, send)
+
+    return debug_wrapper
 
 
 if __name__ == "__main__":
