@@ -548,7 +548,7 @@ def create_app():
     """Create the combined ASGI app: MCP + custom API routes."""
     from starlette.routing import Route
 
-    mcp_app = mcp.http_app()
+    mcp_app = mcp.http_app(path="/")
 
     # Prepend custom routes before the MCP catch-all
     mcp_app.routes.insert(0, Route("/health", healthcheck, methods=["GET"]))
