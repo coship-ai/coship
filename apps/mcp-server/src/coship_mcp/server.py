@@ -539,6 +539,11 @@ async def api_mcp_token(request: Request) -> JSONResponse:
     )
 
 
+async def healthcheck(request: Request) -> JSONResponse:
+    """Simple healthcheck for Railway."""
+    return JSONResponse({"status": "ok"})
+
+
 def create_app():
     """Create the combined ASGI app: MCP + custom API routes."""
     from starlette.routing import Route
@@ -546,6 +551,7 @@ def create_app():
     mcp_app = mcp.http_app()
 
     # Prepend custom routes before the MCP catch-all
+    mcp_app.routes.insert(0, Route("/health", healthcheck, methods=["GET"]))
     mcp_app.routes.insert(0, Route("/api/skills", api_skills, methods=["GET"]))
     mcp_app.routes.insert(0, Route("/api/mcp/token", api_mcp_token, methods=["POST"]))
 

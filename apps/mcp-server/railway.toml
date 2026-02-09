@@ -1,8 +1,9 @@
 [build]
-builder = "nixpacks"
-watchPatterns = ["apps/mcp-server/**"]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+watchPatterns = ["**"]
 
 [deploy]
-startCommand = "fastmcp run src/coship_mcp/server.py --transport http --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/health"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
