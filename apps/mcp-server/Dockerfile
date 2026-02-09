@@ -11,11 +11,14 @@ RUN pip install --no-cache-dir uv==0.4.30
 # Copy only dependency files first for layer caching
 COPY pyproject.toml uv.lock ./
 
-# Install dependencies
-RUN uv sync --no-dev --frozen
+# Install dependencies only (skip editable project install)
+RUN uv sync --no-dev --frozen --no-install-project
 
 # Copy application source
 COPY . .
+
+# Now install the project itself
+RUN uv sync --no-dev --frozen
 
 ENV PATH="/app/.venv/bin:$PATH"
 
